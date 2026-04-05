@@ -1,0 +1,2162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning AI with Laureen — Command Your Future</title>
+<meta name="description" content="Laureen Nicholson — AI Educator making artificial intelligence approachable, powerful, and profitable. Your AI command center starts here.">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   LAUREEN V6 — NEURAL COMMAND CENTER
+   Inspired by: smart cities, AI brains, holographic Jarvis,
+   futuristic fashion, knowledge explosion, data dashboards
+═══════════════════════════════════════════ */
+:root {
+  --void:     #010914;
+  --deep:     #040d1e;
+  --surface:  #081425;
+  --panel:    #0b1c36;
+  --panel2:   #0e2040;
+  --border:   rgba(0,212,255,0.14);
+  --border2:  rgba(255,184,0,0.14);
+  --teal:     #00d4ff;
+  --teal-dk:  #0099cc;
+  --teal-lt:  #80eaff;
+  --gold:     #ffb800;
+  --gold-dk:  #cc9200;
+  --gold-lt:  #ffd060;
+  --pink:     #ff6eb4;
+  --pink-lt:  #ffaed4;
+  --purple:   #7c3aed;
+  --purple-lt:#a78bfa;
+  --green:    #00ff88;
+  --cyan2:    #00ffcc;
+  --text:     #e8f4ff;
+  --muted:    #7aa8cc;
+  --soft:     #4a7090;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NEURAL NETWORK BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 140% 70% at 50% 0%, rgba(0,212,255,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 90% at 85% 100%, rgba(124,58,237,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 15% 60%, rgba(255,184,0,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 70% 30%, rgba(0,255,204,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Smart city grid lines */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridpulse 25s linear infinite;
+}
+
+@keyframes gridpulse {
+  0% { opacity: 0.6; transform: translateY(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; transform: translateY(50px); }
+}
+
+/* ── FLOATING DATA PARTICLES ── */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float-particle linear infinite;
+  opacity: 0;
+}
+@keyframes float-particle {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-20px) scale(1); opacity: 0; }
+}
+
+.app { position: relative; z-index: 1; }
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 70px;
+  background: rgba(1,9,20,0.94);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--teal) 25%, var(--gold) 50%, var(--pink) 75%, transparent 100%);
+  opacity: 0.7;
+  animation: header-glow 4s ease-in-out infinite;
+}
+
+@keyframes header-glow {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 3px;
+}
+
+.logo-script {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold), var(--gold-lt), var(--teal-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+}
+
+.logo-tag {
+  font-family: 'Orbitron', monospace;
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: var(--teal);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.nav { display: flex; gap: 2px; }
+
+.nav-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  color: var(--teal);
+  background: rgba(0,212,255,0.07);
+}
+
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 14px; right: 14px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  box-shadow: 0 0 8px var(--teal);
+}
+
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .25s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dk));
+  color: var(--void);
+  box-shadow: 0 0 20px rgba(0,212,255,0.35), 0 4px 15px rgba(0,0,0,0.3);
+}
+.btn-teal:hover {
+  box-shadow: 0 0 40px rgba(0,212,255,0.6), 0 6px 20px rgba(0,0,0,0.4);
+  transform: translateY(-2px);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+  color: var(--void);
+  box-shadow: 0 0 20px rgba(255,184,0,0.3);
+}
+.btn-gold:hover {
+  box-shadow: 0 0 40px rgba(255,184,0,0.55);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border: 1px solid rgba(0,212,255,0.5);
+  color: var(--teal);
+  background: rgba(0,212,255,0.04);
+}
+.btn-outline:hover {
+  background: rgba(0,212,255,0.1);
+  box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  border-color: var(--teal);
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, var(--purple), #5b21b6);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(124,58,237,0.3);
+}
+.btn-purple:hover {
+  box-shadow: 0 0 40px rgba(124,58,237,0.55);
+  transform: translateY(-2px);
+}
+
+/* ══════════════════════════════
+   PAGES
+══════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero {
+  min-height: calc(100vh - 70px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 80px 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media(max-width: 768px) {
+  .hero { grid-template-columns:1fr; padding: 40px 24px; min-height: auto; }
+  .hero-visual { order: -1; }
+}
+
+.hero-kicker {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--teal);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.hero-kicker::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal));
+  box-shadow: 0 0 8px var(--teal);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 66px);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--text);
+  margin-bottom: 22px;
+}
+
+.hero-title .highlight {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--teal), var(--cyan2), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title .love {
+  font-family: 'Dancing Script', cursive;
+  font-style: normal;
+  font-size: 1.1em;
+  background: linear-gradient(135deg, var(--pink), var(--gold-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 2;
+  margin-bottom: 32px;
+  max-width: 500px;
+}
+.hero-sub strong { color: var(--text); font-weight: 600; }
+
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+
+.hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
+
+.hero-stat-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 26px;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  text-shadow: 0 0 20px currentColor;
+}
+
+.hero-stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-top: 5px;
+}
+
+/* ── NEURAL ORB (hero visual) ── */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neural-scape {
+  position: relative;
+  width: 440px;
+  height: 440px;
+}
+
+/* Outer rings */
+.n-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  animation: spin-ring 20s linear infinite;
+}
+.n-ring:nth-child(1) {
+  inset: 0;
+  border-color: rgba(0,212,255,0.18);
+  animation-duration: 22s;
+}
+.n-ring:nth-child(2) {
+  inset: 30px;
+  border-color: rgba(255,184,0,0.14);
+  animation-duration: 16s;
+  animation-direction: reverse;
+}
+.n-ring:nth-child(3) {
+  inset: 60px;
+  border-color: rgba(255,110,180,0.12);
+  animation-duration: 28s;
+}
+.n-ring:nth-child(4) {
+  inset: 90px;
+  border-color: rgba(0,255,204,0.1);
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+
+@keyframes spin-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Center brain core */
+.n-core {
+  position: absolute;
+  inset: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%,
+    rgba(0,212,255,0.22) 0%,
+    rgba(0,212,255,0.08) 40%,
+    rgba(124,58,237,0.06) 70%,
+    transparent 100%);
+  border: 1px solid rgba(0,212,255,0.35);
+  box-shadow:
+    0 0 60px rgba(0,212,255,0.2),
+    0 0 120px rgba(0,212,255,0.08),
+    inset 0 0 40px rgba(0,212,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.n-brain-icon {
+  font-size: 72px;
+  filter: drop-shadow(0 0 24px rgba(0,212,255,0.9)) drop-shadow(0 0 48px rgba(124,58,237,0.5));
+  animation: brain-pulse 4s ease-in-out infinite;
+}
+
+@keyframes brain-pulse {
+  0%,100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 24px rgba(0,212,255,0.9)) drop-shadow(0 0 48px rgba(124,58,237,0.5));
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 40px rgba(0,212,255,1)) drop-shadow(0 0 70px rgba(255,184,0,0.5));
+  }
+}
+
+.n-core-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: var(--teal);
+  opacity: 0.8;
+}
+
+/* Orbiting tech nodes */
+.n-node {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border: 1px solid;
+  backdrop-filter: blur(10px);
+  cursor: default;
+  transition: transform .3s;
+}
+.n-node:hover { transform: scale(1.2) !important; }
+
+.n-node.n1 { top: 10px; left: 50%; transform: translateX(-50%); border-color: rgba(0,212,255,0.45); background: rgba(0,212,255,0.1); animation: float-v 7s ease-in-out infinite; }
+.n-node.n2 { top: 50%; right: 10px; transform: translateY(-50%); border-color: rgba(255,184,0,0.45); background: rgba(255,184,0,0.08); animation: float-h 6s ease-in-out infinite 1s; }
+.n-node.n3 { bottom: 10px; left: 50%; transform: translateX(-50%); border-color: rgba(255,110,180,0.45); background: rgba(255,110,180,0.08); animation: float-v 8s ease-in-out infinite 2s; }
+.n-node.n4 { top: 50%; left: 10px; transform: translateY(-50%); border-color: rgba(124,58,237,0.45); background: rgba(124,58,237,0.08); animation: float-h 5s ease-in-out infinite 3s; }
+.n-node.n5 { top: 18%; right: 18%; border-color: rgba(0,255,204,0.4); background: rgba(0,255,204,0.07); animation: float-d 9s ease-in-out infinite 0.5s; width:38px; height:38px; font-size:16px; border-radius:8px; }
+.n-node.n6 { bottom: 18%; left: 18%; border-color: rgba(0,255,204,0.4); background: rgba(0,255,204,0.07); animation: float-d 7s ease-in-out infinite 1.5s; width:38px; height:38px; font-size:16px; border-radius:8px; }
+
+@keyframes float-v {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+}
+@keyframes float-h {
+  0%,100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(-8px); }
+}
+@keyframes float-d {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-5px,-7px) scale(1.05); }
+}
+
+/* Connection lines SVG */
+.n-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+/* ══════════════════════════════
+   STATS BANNER
+══════════════════════════════ */
+.stats-banner {
+  display: flex;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(90deg, rgba(0,212,255,0.03), rgba(124,58,237,0.03), rgba(255,184,0,0.03));
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.04), transparent);
+  animation: sweep 5s linear infinite;
+}
+
+@keyframes sweep {
+  from { left: -100%; }
+  to { left: 200%; }
+}
+
+.stat-item {
+  flex: 1;
+  padding: 30px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+  transition: background .3s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: rgba(0,212,255,0.04); }
+
+.stat-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 30px;
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-val.teal  { color: var(--teal);  text-shadow: 0 0 20px rgba(0,212,255,0.6); }
+.stat-val.gold  { color: var(--gold);  text-shadow: 0 0 20px rgba(255,184,0,0.6); }
+.stat-val.pink  { color: var(--pink);  text-shadow: 0 0 20px rgba(255,110,180,0.6); }
+.stat-val.green { color: var(--green); text-shadow: 0 0 20px rgba(0,255,136,0.6); }
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+/* ══════════════════════════════
+   SECTIONS & LAYOUT
+══════════════════════════════ */
+.section {
+  padding: 80px 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+@media(max-width:768px) {
+  .section { padding: 48px 24px; }
+  .header { padding: 0 20px; }
+}
+
+.section-kicker {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--teal);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.section-kicker::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal));
+  box-shadow: 0 0 6px var(--teal);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+.section-title em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--teal), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-sub {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.9;
+  max-width: 580px;
+  margin-bottom: 40px;
+}
+
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+
+@media(max-width:900px) { .g3{grid-template-columns:1fr 1fr;} .g4{grid-template-columns:1fr 1fr;} }
+@media(max-width:600px) { .g2,.g3,.g4{grid-template-columns:1fr;} }
+
+/* ══════════════════════════════
+   CARDS
+══════════════════════════════ */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition: all .35s;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--gold), var(--pink));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s;
+}
+
+.card:hover {
+  border-color: rgba(0,212,255,0.32);
+  transform: translateY(-5px);
+  box-shadow:
+    0 20px 60px rgba(0,212,255,0.1),
+    0 0 0 1px rgba(0,212,255,0.12);
+  background: var(--panel2);
+}
+.card:hover::before { transform: scaleX(1); }
+
+.card-icon { font-size: 34px; margin-bottom: 14px; display: block; }
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.card-desc { font-size: 13px; color: var(--muted); line-height: 1.75; }
+.card-price { font-family:'Orbitron',monospace; font-size:12px; color:var(--gold); margin-top:14px; display:block; font-weight:700; letter-spacing:1px; }
+
+/* ══════════════════════════════
+   FEATURE SPLITS
+══════════════════════════════ */
+.feature-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 80px 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+@media(max-width:768px) {
+  .feature-split { grid-template-columns:1fr; padding:48px 24px; gap:32px; }
+  .feature-split.reverse .feat-img { order:-1; }
+}
+
+.feat-img {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative;
+  box-shadow: 0 0 50px rgba(0,212,255,0.1), 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.feat-img img {
+  width: 100%; height: 360px;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s;
+}
+.feat-img:hover img { transform: scale(1.04); }
+
+.feat-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(1,9,20,0.6) 100%);
+  pointer-events: none;
+}
+
+/* Scan line effect on images */
+.feat-img::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.5), transparent);
+  z-index: 2;
+  animation: scan-img 4s linear infinite;
+}
+@keyframes scan-img {
+  0% { top: 0; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.feature-list { list-style: none; margin-top: 16px; }
+.feature-list li {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+}
+.feature-list li:last-child { border-bottom: none; }
+.feature-list li strong { color: var(--text); }
+.fl-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+
+/* ══════════════════════════════
+   QUOTE BAND
+══════════════════════════════ */
+.quote-band {
+  background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(124,58,237,0.05), rgba(255,184,0,0.03));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-band::before {
+  content: '"';
+  position: absolute;
+  top: -30px; left: 40px;
+  font-family: 'Playfair Display', serif;
+  font-size: 240px;
+  color: rgba(0,212,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* Animated data lines behind quote */
+.quote-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 28px,
+    rgba(0,212,255,0.015) 28px,
+    rgba(0,212,255,0.015) 29px
+  );
+  pointer-events: none;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 3.2vw, 36px);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text);
+  max-width: 820px;
+  margin: 0 auto 18px;
+  line-height: 1.45;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-author {
+  font-family: 'Dancing Script', cursive;
+  font-size: 24px;
+  background: linear-gradient(135deg, var(--gold), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════
+   JARVIS / HOLOGRAPHIC PANEL
+   (inspired by Google Jarvis image)
+══════════════════════════════ */
+.jarvis-panel {
+  margin: 0 48px 0;
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 20px;
+  background: linear-gradient(135deg,
+    rgba(0,212,255,0.04) 0%,
+    rgba(124,58,237,0.04) 50%,
+    rgba(0,212,255,0.02) 100%);
+  padding: 56px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media(max-width:768px){
+  .jarvis-panel { grid-template-columns:1fr; margin:0 24px; padding:36px 24px; }
+}
+
+.jarvis-panel::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--purple-lt), var(--teal), transparent);
+  animation: top-sweep 3s ease-in-out infinite;
+}
+@keyframes top-sweep {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.jarvis-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+.jarvis-left { position: relative; }
+
+.jarvis-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.jarvis-label .j-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  animation: pdot 2s infinite;
+}
+
+.jarvis-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.jarvis-title em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--teal), var(--purple-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.jarvis-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+/* Holographic data dashboard (right side) */
+.jarvis-right {
+  position: relative;
+}
+
+.holo-dashboard {
+  background: rgba(0,212,255,0.03);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+}
+
+.holo-dashboard::before {
+  content: 'SYSTEM STATUS';
+  font-family: 'Orbitron', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--teal);
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.holo-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.holo-bar-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--soft);
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.holo-bar-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.holo-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  position: relative;
+  animation: bar-grow 2s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes bar-grow {
+  from { width: 0; }
+}
+
+.holo-bar-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  color: var(--text);
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.holo-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.holo-metric {
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.1);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.holo-metric-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.holo-metric-label {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+/* ══════════════════════════════
+   SMART CITY SECTION
+   (inspired by connected city image)
+══════════════════════════════ */
+.city-section {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.city-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      var(--void) 0%,
+      rgba(0,20,60,0.7) 40%,
+      rgba(0,10,40,0.8) 100%),
+    url('https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1400&auto=format&fit=crop&q=70') center/cover;
+  filter: saturate(1.4) hue-rotate(180deg);
+}
+
+.city-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0, transparent 49px, rgba(0,212,255,0.04) 49px, rgba(0,212,255,0.04) 50px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 49px, rgba(0,212,255,0.04) 49px, rgba(0,212,255,0.04) 50px);
+}
+
+.city-content {
+  position: relative;
+  z-index: 2;
+  padding: 100px 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.city-kicker {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--cyan2);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.city-kicker::before, .city-kicker::after {
+  content: '';
+  width: 30px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan2));
+}
+.city-kicker::after { background: linear-gradient(90deg, var(--cyan2), transparent); }
+
+.city-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4.5vw, 56px);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.city-title span {
+  background: linear-gradient(135deg, var(--cyan2), var(--teal), var(--purple-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.city-sub {
+  font-size: 16px;
+  color: rgba(200,230,255,0.75);
+  max-width: 580px;
+  margin: 0 auto 48px;
+  line-height: 1.9;
+}
+
+/* Connection network display */
+.network-grid {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.network-node {
+  background: rgba(0,212,255,0.06);
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 16px;
+  padding: 20px 24px;
+  text-align: center;
+  min-width: 120px;
+  position: relative;
+  transition: all .3s;
+}
+
+.network-node:hover {
+  background: rgba(0,212,255,0.12);
+  border-color: var(--teal);
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(0,212,255,0.25);
+}
+
+.network-node-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+.network-node-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════
+   KNOWLEDGE EXPLOSION SECTION
+   (inspired by book/science image)
+══════════════════════════════ */
+.knowledge-section {
+  padding: 80px 48px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media(max-width:768px){
+  .knowledge-grid { grid-template-columns:1fr; }
+}
+
+.knowledge-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.knowledge-orb {
+  width: 320px;
+  height: 320px;
+  position: relative;
+}
+
+.k-center {
+  position: absolute;
+  inset: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,184,0,0.15), rgba(124,58,237,0.1), transparent);
+  border: 1px solid rgba(255,184,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  animation: k-pulse 3s ease-in-out infinite;
+  box-shadow: 0 0 40px rgba(255,184,0,0.15);
+}
+
+@keyframes k-pulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 40px rgba(255,184,0,0.15); }
+  50% { transform: scale(1.04); box-shadow: 0 0 70px rgba(255,184,0,0.3); }
+}
+
+/* Orbiting subject icons */
+.k-orbit {
+  position: absolute;
+  inset: 0;
+  animation: spin-ring 12s linear infinite;
+}
+.k-orbit:nth-child(2) { animation-duration: 16s; animation-direction: reverse; }
+
+.k-item {
+  position: absolute;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,184,0,0.3);
+  background: rgba(255,184,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.subject-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.subject-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid;
+  transition: all .2s;
+  cursor: default;
+}
+
+.subject-pill:hover { transform: translateY(-2px); }
+
+.sp-teal { border-color: rgba(0,212,255,0.4); color: var(--teal); background: rgba(0,212,255,0.06); }
+.sp-gold { border-color: rgba(255,184,0,0.4); color: var(--gold); background: rgba(255,184,0,0.06); }
+.sp-pink { border-color: rgba(255,110,180,0.4); color: var(--pink); background: rgba(255,110,180,0.06); }
+.sp-purple { border-color: rgba(124,58,237,0.4); color: var(--purple-lt); background: rgba(124,58,237,0.06); }
+.sp-green { border-color: rgba(0,255,136,0.4); color: var(--green); background: rgba(0,255,136,0.06); }
+
+/* ══════════════════════════════
+   TOOLS SECTION
+══════════════════════════════ */
+.tools-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.tool-pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--panel);
+  transition: all .25s;
+  cursor: default;
+}
+
+.tool-pill:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(0,212,255,0.07);
+  box-shadow: 0 0 14px rgba(0,212,255,0.18);
+  transform: translateY(-2px);
+}
+
+.tool-pill.featured {
+  border-color: rgba(0,212,255,0.4);
+  color: var(--teal);
+  background: rgba(0,212,255,0.07);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════
+   PRICING
+══════════════════════════════ */
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+@media(max-width:768px){ .price-grid{ grid-template-columns:1fr; } }
+
+.price-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 30px 26px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+  overflow: hidden;
+}
+
+.price-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.price-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,212,255,0.3);
+  box-shadow: 0 20px 60px rgba(0,212,255,0.1);
+}
+.price-card:hover::after { opacity: 1; }
+
+.price-card.featured {
+  border-color: var(--teal);
+  background: rgba(0,212,255,0.04);
+  box-shadow: 0 0 40px rgba(0,212,255,0.12);
+}
+
+.price-card.featured::before {
+  content: '✦ MOST POPULAR';
+  position: absolute;
+  top: -14px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg,var(--teal),var(--teal-dk));
+  color: var(--void);
+  font-size: 8px;
+  font-weight: 700;
+  font-family: 'Orbitron',monospace;
+  letter-spacing: 2px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.price-label { font-family:'Orbitron',monospace; font-size:8px; letter-spacing:3px; color:var(--soft); text-transform:uppercase; margin-bottom:10px; }
+.price-val { font-family:'Orbitron',monospace; font-size:40px; font-weight:900; color:var(--text); line-height:1; }
+.price-unit { font-size:11px; color:var(--soft); display:block; margin:6px 0 20px; }
+
+.price-features { list-style:none; text-align:left; margin-bottom:22px; }
+.price-features li { font-size:12px; color:var(--muted); padding:7px 0; border-bottom:1px solid var(--border); display:flex; gap:8px; align-items:center; }
+.price-features li:last-child { border-bottom:none; }
+.price-features li::before { content:'▸'; color:var(--teal); flex-shrink:0; }
+
+/* ══════════════════════════════
+   FAQ
+══════════════════════════════ */
+.faq-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 22px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all .25s;
+}
+.faq-item:hover { border-color: rgba(0,212,255,0.3); background: var(--panel2); }
+.faq-item.open { border-color: var(--teal); background: rgba(0,212,255,0.03); }
+.faq-q { font-size:14px; font-weight:600; color:var(--text); display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.faq-arrow { color:var(--teal); transition:transform .25s; }
+.faq-item.open .faq-arrow { transform:rotate(180deg); }
+.faq-a { display:none; font-size:13px; color:var(--muted); margin-top:12px; padding-top:12px; border-top:1px solid var(--border); line-height:1.85; }
+.faq-item.open .faq-a { display:block; }
+
+/* ══════════════════════════════
+   CONTACT
+══════════════════════════════ */
+.contact-link {
+  display: flex; align-items: center; gap:14px;
+  padding: 16px 20px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all .25s;
+  margin-bottom: 10px;
+}
+.contact-link:hover {
+  border-color: var(--teal);
+  transform: translateX(5px);
+  box-shadow: 0 0 24px rgba(0,212,255,0.12);
+  background: var(--panel2);
+}
+.ci { font-size:22px; width:38px; text-align:center; flex-shrink:0; }
+.cl { flex:1; }
+.cl-title { font-size:13px; font-weight:600; color:var(--text); margin-bottom:2px; }
+.cl-sub { font-size:11px; color:var(--soft); }
+.ca { color:var(--teal); font-size:18px; }
+
+/* ══════════════════════════════
+   FORM
+══════════════════════════════ */
+.form-group { margin-bottom:14px; }
+.form-label { display:block; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-family:'Orbitron',monospace; }
+.form-ctrl { width:100%; background:rgba(0,212,255,0.03); border:1px solid var(--border); border-radius:6px; padding:11px 14px; color:var(--text); font-family:'Inter',sans-serif; font-size:13px; outline:none; transition:border-color .2s; }
+.form-ctrl:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(0,212,255,0.08); background:rgba(0,212,255,0.05); }
+textarea.form-ctrl { resize:vertical; min-height:90px; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+.footer {
+  background: rgba(4,13,30,0.97);
+  border-top: 1px solid var(--border);
+  padding: 44px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.footer-logo { font-family:'Dancing Script',cursive; font-size:26px; background:linear-gradient(135deg,var(--gold),var(--gold-lt),var(--teal-lt)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.footer-links { display:flex; gap:22px; flex-wrap:wrap; }
+.footer-links a { color:var(--soft); text-decoration:none; font-size:12px; transition:color .2s; }
+.footer-links a:hover { color:var(--teal); }
+.footer-copy { font-size:11px; color:var(--soft); }
+
+/* ══════════════════════════════
+   UTILS
+══════════════════════════════ */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .65s, transform .65s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+.live-dot { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 10px var(--green); animation:pdot 2s infinite; display:inline-block; margin-right:4px; }
+@keyframes pdot { 0%,100%{opacity:1}50%{opacity:.3} }
+
+.divider {
+  display:flex; align-items:center; gap:20px;
+  padding:0 48px; opacity:.35;
+}
+.div-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--teal),transparent); }
+.div-icon { color:var(--teal); font-size:12px; }
+
+/* ══════════════════════════════
+   ABOUT TIMELINE
+══════════════════════════════ */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+  margin-top: 28px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--teal), var(--purple), var(--gold), transparent);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -26px; top: 4px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  background: var(--void);
+  box-shadow: 0 0 10px rgba(0,212,255,0.5);
+}
+.tl-year {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+.tl-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.tl-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+/* ══════════════════════════════
+   MOBILE
+══════════════════════════════ */
+@media(max-width:768px){
+  .header { padding: 0 16px; height:auto; padding-top:10px; padding-bottom:10px; }
+  .nav { flex-wrap:wrap; justify-content:center; }
+  .neural-scape { width:300px; height:300px; }
+  .jarvis-panel { margin:0 16px; }
+  .knowledge-orb { width:220px; height:220px; }
+  .stats-banner { flex-wrap:wrap; }
+  .stat-item { min-width:50%; }
+  .footer { padding:32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<div class="app">
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="logo">
+    <span class="logo-script">Learning AI with Laureen</span>
+    <span class="logo-tag">Neural Command Center · Est. 2026</span>
+  </div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showPage('home',this)">Home</button>
+    <button class="nav-btn" onclick="showPage('about',this)">About</button>
+    <button class="nav-btn" onclick="showPage('services',this)">Services</button>
+    <button class="nav-btn" onclick="showPage('tools',this)">AI Tools</button>
+    <button class="nav-btn" onclick="showPage('pricing',this)">Pricing</button>
+    <button class="nav-btn" onclick="showPage('faq',this)">FAQ</button>
+    <button class="nav-btn" onclick="showPage('contact',this)">Book Me</button>
+  </nav>
+  <a href="mailto:laureennicholson635@gmail.com" class="btn btn-teal">⚡ Book a Session</a>
+</div>
+
+<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<div class="page active" id="p-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text reveal">
+      <div class="hero-kicker"><span class="live-dot"></span>AI Command Center · Online Now</div>
+      <h1 class="hero-title">
+        The Future of AI<br>
+        Is <span class="highlight">Already Here.</span><br>
+        Let's <span class="love">Master It</span> Together.
+      </h1>
+      <p class="hero-sub">
+        I'm <strong>Laureen Nicholson</strong> — AI educator, automation architect,
+        and your guide to turning artificial intelligence into your most powerful business asset.
+        <strong>No jargon. No judgment. Just results.</strong>
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:laureennicholson635@gmail.com" class="btn btn-teal">⚡ Book Free Consult</a>
+        <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank" class="btn btn-gold">🎵 Watch on TikTok</a>
+        <a href="https://learningaiwithlaureen.com" target="_blank" class="btn btn-outline">🌐 learningaiwithlaureen.com</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-val" style="color:var(--teal);">10+</span>
+          <div class="hero-stat-label">Yrs Healthcare AI</div>
+        </div>
+        <div>
+          <span class="hero-stat-val" style="color:var(--gold);">$95</span>
+          <div class="hero-stat-label">Starting Rate/hr</div>
+        </div>
+        <div>
+          <span class="hero-stat-val" style="color:var(--pink);">2</span>
+          <div class="hero-stat-label">AI Businesses</div>
+        </div>
+        <div>
+          <span class="hero-stat-val" style="color:var(--green);">100%</span>
+          <div class="hero-stat-label">Remote & Flexible</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEURAL VISUALIZATION (inspired by brain + AI tools images) -->
+    <div class="hero-visual reveal">
+      <div class="neural-scape">
+        <div class="n-ring"></div>
+        <div class="n-ring"></div>
+        <div class="n-ring"></div>
+        <div class="n-ring"></div>
+        <div class="n-core">
+          <div class="n-brain-icon">🧠</div>
+          <div class="n-core-label">AI CORE</div>
+        </div>
+        <div class="n-node n1" title="ChatGPT">🤖</div>
+        <div class="n-node n2" title="Automation">⚡</div>
+        <div class="n-node n3" title="Healthcare AI">🏥</div>
+        <div class="n-node n4" title="Make.com">🔗</div>
+        <div class="n-node n5" title="TikTok">🎵</div>
+        <div class="n-node n6" title="Data">📊</div>
+        <!-- SVG connection lines -->
+        <svg class="n-svg" viewBox="0 0 440 440">
+          <line x1="220" y1="30" x2="220" y2="120" stroke="#00d4ff" stroke-width="1"/>
+          <line x1="410" y1="220" x2="320" y2="220" stroke="#ffb800" stroke-width="1"/>
+          <line x1="220" y1="410" x2="220" y2="320" stroke="#ff6eb4" stroke-width="1"/>
+          <line x1="30" y1="220" x2="120" y2="220" stroke="#7c3aed" stroke-width="1"/>
+          <line x1="330" y1="110" x2="280" y2="160" stroke="#00ffcc" stroke-width="0.5"/>
+          <line x1="110" y1="330" x2="160" y2="280" stroke="#00ffcc" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BANNER -->
+  <div class="stats-banner">
+    <div class="stat-item"><span class="stat-val teal">$95+</span><div class="stat-label">Per Hour Rate</div></div>
+    <div class="stat-item"><span class="stat-val gold">100%</span><div class="stat-label">Remote & Flexible</div></div>
+    <div class="stat-item"><span class="stat-val pink">HIPAA</span><div class="stat-label">Compliant Workflows</div></div>
+    <div class="stat-item"><span class="stat-val green">LIVE</span><div class="stat-label"><span class="live-dot"></span>Available Now</div></div>
+  </div>
+
+  <!-- JARVIS HOLOGRAPHIC PANEL (inspired by Google Jarvis image) -->
+  <div style="padding:60px 0 0;">
+    <div class="jarvis-panel reveal">
+      <div class="jarvis-left">
+        <div class="jarvis-label">
+          <span class="j-dot"></span>
+          Neural Command · Active
+        </div>
+        <h2 class="jarvis-title">
+          Your Personal<br><em>AI Command Center</em><br>Is Ready
+        </h2>
+        <p class="jarvis-desc">
+          Like Jarvis in Tony Stark's lab — imagine an AI system that automates your
+          busiest workflows, answers questions before you ask them, and works 24/7
+          so you don't have to. That's what I build with my clients.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="mailto:laureennicholson635@gmail.com" class="btn btn-teal">Start Your Command Center</a>
+          <button onclick="showPage('services',document.querySelectorAll('.nav-btn')[2])" class="btn btn-outline">View Services →</button>
+        </div>
+      </div>
+
+      <!-- Holographic dashboard panel (inspired by Aqua dashboard image) -->
+      <div class="jarvis-right">
+        <div class="holo-dashboard">
+          <div class="holo-bar-row">
+            <span class="holo-bar-label">ChatGPT</span>
+            <div class="holo-bar-track"><div class="holo-bar-fill" style="width:96%;background:linear-gradient(90deg,#00d4ff,#00ffcc);"></div></div>
+            <span class="holo-bar-val">96%</span>
+          </div>
+          <div class="holo-bar-row">
+            <span class="holo-bar-label">Claude AI</span>
+            <div class="holo-bar-track"><div class="holo-bar-fill" style="width:94%;background:linear-gradient(90deg,#7c3aed,#a78bfa);"></div></div>
+            <span class="holo-bar-val">94%</span>
+          </div>
+          <div class="holo-bar-row">
+            <span class="holo-bar-label">Zapier</span>
+            <div class="holo-bar-track"><div class="holo-bar-fill" style="width:91%;background:linear-gradient(90deg,#ffb800,#ffd060);"></div></div>
+            <span class="holo-bar-val">91%</span>
+          </div>
+          <div class="holo-bar-row">
+            <span class="holo-bar-label">Make.com</span>
+            <div class="holo-bar-track"><div class="holo-bar-fill" style="width:89%;background:linear-gradient(90deg,#ff6eb4,#ffaed4);"></div></div>
+            <span class="holo-bar-val">89%</span>
+          </div>
+          <div class="holo-bar-row">
+            <span class="holo-bar-label">Copilot</span>
+            <div class="holo-bar-track"><div class="holo-bar-fill" style="width:88%;background:linear-gradient(90deg,#00ff88,#00ffcc);"></div></div>
+            <span class="holo-bar-val">88%</span>
+          </div>
+          <div class="holo-bar-row">
+            <span class="holo-bar-label">HIPAA/RCM</span>
+            <div class="holo-bar-track"><div class="holo-bar-fill" style="width:98%;background:linear-gradient(90deg,#ff4444,#ff8888);"></div></div>
+            <span class="holo-bar-val">10yr</span>
+          </div>
+          <div class="holo-metrics">
+            <div class="holo-metric">
+              <span class="holo-metric-val" style="color:var(--teal);">15+</span>
+              <div class="holo-metric-label">AI Tools</div>
+            </div>
+            <div class="holo-metric">
+              <span class="holo-metric-val" style="color:var(--gold);">2</span>
+              <div class="holo-metric-label">Businesses</div>
+            </div>
+            <div class="holo-metric">
+              <span class="holo-metric-val" style="color:var(--pink);">100%</span>
+              <div class="holo-metric-label">Remote</div>
+            </div>
+            <div class="holo-metric">
+              <span class="holo-metric-val" style="color:var(--green);">24hr</span>
+              <div class="holo-metric-label">Response</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE BAND -->
+  <div class="quote-band reveal" style="margin-top:60px;">
+    <p class="quote-text">"AI isn't replacing humans — it's giving the right humans an unfair advantage. Let's make sure you're one of them."</p>
+    <span class="quote-author">— Laureen Nicholson</span>
+  </div>
+
+  <!-- SMART CITY / CONNECTED NETWORK SECTION (inspired by city connectivity image) -->
+  <div class="city-section reveal" style="margin-top:0;">
+    <div class="city-bg"></div>
+    <div class="city-content">
+      <div class="city-kicker">The Connected Future</div>
+      <h2 class="city-title">
+        AI Is Building a <span>Smarter World.</span><br>
+        Be the One Who Speaks Its Language.
+      </h2>
+      <p class="city-sub">
+        Every industry, every city, every business is becoming AI-connected.
+        From healthcare systems to automation pipelines — the future belongs to
+        people who understand how to harness it.
+      </p>
+      <!-- AI ecosystem nodes -->
+      <div class="network-grid">
+        <div class="network-node">
+          <span class="network-node-icon">🤖</span>
+          <div class="network-node-name">ChatGPT</div>
+        </div>
+        <div class="network-node">
+          <span class="network-node-icon">🧠</span>
+          <div class="network-node-name">Claude AI</div>
+        </div>
+        <div class="network-node">
+          <span class="network-node-icon">⚡</span>
+          <div class="network-node-name">Zapier</div>
+        </div>
+        <div class="network-node">
+          <span class="network-node-icon">🔗</span>
+          <div class="network-node-name">Make.com</div>
+        </div>
+        <div class="network-node">
+          <span class="network-node-icon">🏥</span>
+          <div class="network-node-name">Healthcare</div>
+        </div>
+        <div class="network-node">
+          <span class="network-node-icon">📊</span>
+          <div class="network-node-name">Copilot</div>
+        </div>
+        <div class="network-node">
+          <span class="network-node-icon">🎵</span>
+          <div class="network-node-name">TikTok AI</div>
+        </div>
+        <div class="network-node">
+          <span class="network-node-icon">🌐</span>
+          <div class="network-node-name">No-Code</div>
+        </div>
+      </div>
+      <a href="mailto:laureennicholson635@gmail.com" class="btn btn-teal" style="font-size:13px;padding:14px 32px;">
+        ⚡ Connect With Laureen Today
+      </a>
+    </div>
+  </div>
+
+  <!-- FEATURE SPLIT: Why Work With Me -->
+  <div class="feature-split reveal">
+    <div class="feat-img">
+      <img
+        src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop&q=80"
+        alt="AI neural network"
+        onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80'"
+      >
+    </div>
+    <div class="feat-text">
+      <div class="section-kicker">Why Work With Me</div>
+      <h2 class="section-title">AI Should Feel Like a <em>Superpower,</em> Not a Headache</h2>
+      <p class="section-sub">Most AI training is cold, corporate, and overwhelming. I built something different — human-first, results-first, tailored to YOU.</p>
+      <ul class="feature-list">
+        <li><span class="fl-icon">🎯</span><div><strong>Practical, not theoretical.</strong> Every session includes real workflows you use the same day.</div></li>
+        <li><span class="fl-icon">💛</span><div><strong>Warm & patient approach.</strong> No jargon. No judgment. I meet you exactly where you are.</div></li>
+        <li><span class="fl-icon">🏥</span><div><strong>Healthcare expertise.</strong> 10+ years RCM — HIPAA-aware, EHR-tested, clinically real.</div></li>
+        <li><span class="fl-icon">⚡</span><div><strong>Results on day one.</strong> You leave every session with something actually working.</div></li>
+        <li><span class="fl-icon">🌐</span><div><strong>Visit learningaiwithlaureen.com</strong> for resources, tutorials, and free tips.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FEATURE SPLIT 2 -->
+  <div class="feature-split reverse reveal">
+    <div class="feat-text">
+      <div class="section-kicker">Two Businesses. One Mission.</div>
+      <h2 class="section-title">Teaching AI. <em>Building</em> AI. Living AI.</h2>
+      <p class="section-sub">I don't just teach AI tools — I run two businesses powered by them every single day.</p>
+      <ul class="feature-list">
+        <li><span class="fl-icon">🎵</span><div><strong>@LearningAIwithLaureen on TikTok.</strong> Daily AI tips, tool reviews, no-code tutorials for beginners to pros.</div></li>
+        <li><span class="fl-icon">🏥</span><div><strong>automatedrcm.com</strong> — AI-powered healthcare billing and Revenue Cycle Management automation.</div></li>
+        <li><span class="fl-icon">⚡</span><div><strong>Zapier · Make.com · Power Automate</strong> — I build automations that eliminate repetitive work permanently.</div></li>
+      </ul>
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+        <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank" class="btn btn-gold">Watch on TikTok →</a>
+        <a href="https://automatedrcm.com" target="_blank" class="btn btn-outline">Healthcare AI →</a>
+      </div>
+    </div>
+    <div class="feat-img">
+      <img
+        src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop&q=80"
+        alt="Futuristic AI command center"
+        onerror="this.src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80'"
+      >
+    </div>
+  </div>
+
+  <!-- SERVICES PREVIEW -->
+  <div class="section reveal">
+    <div style="text-align:center;margin-bottom:44px;">
+      <div class="section-kicker" style="justify-content:center;">What I Offer</div>
+      <h2 class="section-title" style="text-align:center;">Services That <em>Transform</em> How You Work</h2>
+    </div>
+    <div class="g3">
+      <div class="card">
+        <span class="card-icon">🤖</span>
+        <div class="card-title">AI Tool Training</div>
+        <p class="card-desc">1-on-1 coaching on ChatGPT, Claude, Copilot, and more. Hands-on, practical, tailored to your exact business.</p>
+        <span class="card-price">FROM $95/HR</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <div class="card-title">Workflow Automation</div>
+        <p class="card-desc">Zapier, Make.com & Power Automate — I build the systems that eliminate your most time-consuming tasks permanently.</p>
+        <span class="card-price">FROM $100/HR</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏥</span>
+        <div class="card-title">Healthcare AI</div>
+        <p class="card-desc">HIPAA-compliant AI for medical billing, RCM, and clinical documentation. 10+ years of real healthcare experience.</p>
+        <span class="card-price">FROM $1,500/MO</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <button onclick="showPage('services',document.querySelectorAll('.nav-btn')[2])" class="btn btn-outline">See All Services →</button>
+    </div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ═══════════════ ABOUT PAGE ═══════════════ -->
+<div class="page" id="p-about">
+
+  <!-- KNOWLEDGE EXPLOSION SECTION (inspired by science book image) -->
+  <div class="knowledge-section reveal">
+    <div style="text-align:center;margin-bottom:60px;">
+      <div class="section-kicker" style="justify-content:center;">My Story</div>
+      <h2 class="section-title" style="text-align:center;">From Healthcare Billing to <em>AI Pioneer</em></h2>
+    </div>
+
+    <div class="knowledge-grid">
+      <!-- Visual side: knowledge explosion orb -->
+      <div class="knowledge-visual">
+        <div class="knowledge-orb">
+          <div class="k-center">📚</div>
+          <div class="k-orbit">
+            <div class="k-item" style="transform:translateX(-50%) rotate(0deg) translateY(-155px) rotate(0deg);">🏥</div>
+          </div>
+          <div class="k-orbit">
+            <div class="k-item" style="transform:translateX(-50%) rotate(90deg) translateY(-155px) rotate(-90deg);">🤖</div>
+          </div>
+          <div class="k-orbit">
+            <div class="k-item" style="transform:translateX(-50%) rotate(180deg) translateY(-155px) rotate(-180deg);">⚡</div>
+          </div>
+          <div class="k-orbit">
+            <div class="k-item" style="transform:translateX(-50%) rotate(270deg) translateY(-155px) rotate(-270deg);">🎵</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text side -->
+      <div>
+        <p style="font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:16px;">
+          I spent over <strong style="color:var(--text);">10 years deep in medical billing and Revenue Cycle Management</strong> — learning every system, every payer rule, every workflow. And then AI arrived and changed everything.
+        </p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:16px;">
+          I didn't just use it. I dove in headfirst — mastering ChatGPT, Claude, Copilot, Zapier, Make.com, and dozens of other tools. I built two businesses. I started teaching on TikTok. And now I help others do the same.
+        </p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:24px;">
+          My mission: <strong style="color:var(--text);">make AI feel like YOUR superpower</strong> — no matter your technical background.
+        </p>
+
+        <!-- Subject pills (inspired by knowledge explosion image) -->
+        <div class="subject-pills">
+          <span class="subject-pill sp-teal">ChatGPT</span>
+          <span class="subject-pill sp-purple">Claude AI</span>
+          <span class="subject-pill sp-gold">Copilot</span>
+          <span class="subject-pill sp-teal">Zapier</span>
+          <span class="subject-pill sp-pink">Make.com</span>
+          <span class="subject-pill sp-green">Power Automate</span>
+          <span class="subject-pill sp-gold">HIPAA</span>
+          <span class="subject-pill sp-purple">Prompt Engineering</span>
+          <span class="subject-pill sp-teal">No-Code</span>
+          <span class="subject-pill sp-pink">TikTok AI</span>
+          <span class="subject-pill sp-green">GitHub Pages</span>
+          <span class="subject-pill sp-gold">SEO</span>
+          <span class="subject-pill sp-teal">EHR Systems</span>
+          <span class="subject-pill sp-purple">HTML/CSS/JS</span>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2013–2023</div>
+            <div class="tl-title">10+ Years Healthcare RCM</div>
+            <div class="tl-desc">Medical billing, HIPAA compliance, EHR systems, revenue cycle management across multiple practices.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2023</div>
+            <div class="tl-title">AI Deep Dive Begins</div>
+            <div class="tl-desc">Mastered ChatGPT, Claude, Copilot, Zapier, Make.com, and 15+ AI tools. Built automations that transformed healthcare workflows.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-title">Two AI Businesses Launched</div>
+            <div class="tl-desc">Launched @LearningAIwithLaureen on TikTok and automatedrcm.com for healthcare AI automation.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2026</div>
+            <div class="tl-title">learningaiwithlaureen.com</div>
+            <div class="tl-desc">Full-service AI education, consulting, and automation — helping clients nationwide go from overwhelmed to empowered.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+          <a href="mailto:laureennicholson635@gmail.com" class="btn btn-teal">⚡ Work With Me</a>
+          <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank" class="btn btn-outline">Follow My Journey →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-banner">
+    <div class="stat-item"><span class="stat-val teal">10+</span><div class="stat-label">Years Healthcare RCM</div></div>
+    <div class="stat-item"><span class="stat-val gold">15+</span><div class="stat-label">AI Tools Mastered</div></div>
+    <div class="stat-item"><span class="stat-val pink">2</span><div class="stat-label">AI-Powered Businesses</div></div>
+    <div class="stat-item"><span class="stat-val green">100%</span><div class="stat-label">Remote & Flexible</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════ SERVICES PAGE ═══════════════ -->
+<div class="page" id="p-services">
+  <div class="section">
+    <div style="text-align:center;margin-bottom:50px;" class="reveal">
+      <div class="section-kicker" style="justify-content:center;">What I Offer</div>
+      <h2 class="section-title" style="text-align:center;">Services Built for <em>Real Results</em></h2>
+      <p style="font-size:15px;color:var(--muted);text-align:center;max-width:500px;margin:0 auto;">No fluff. No overwhelm. Just practical AI skills that change how you work.</p>
+    </div>
+    <div class="g3 reveal">
+      <div class="card"><span class="card-icon">🤖</span><div class="card-title">AI Tool Training</div><p class="card-desc">1-on-1 coaching on ChatGPT, Claude, Copilot. Every session is hands-on and tailored to your specific goals.</p><span class="card-price">$95–125/HR</span></div>
+      <div class="card"><span class="card-icon">⚡</span><div class="card-title">Workflow Automation</div><p class="card-desc">Zapier, Make.com & Power Automate — I build automations that permanently eliminate your most tedious tasks.</p><span class="card-price">$100–150/HR</span></div>
+      <div class="card"><span class="card-icon">💬</span><div class="card-title">Prompt Engineering</div><p class="card-desc">Custom prompt systems engineered to get consistent, high-quality results from AI every single time.</p><span class="card-price">$95–125/HR</span></div>
+      <div class="card"><span class="card-icon">🏥</span><div class="card-title">Healthcare AI</div><p class="card-desc">HIPAA-compliant AI for medical billing, RCM, prior auth, and clinical documentation. Real 10+ year expertise.</p><span class="card-price">$1,500–2,500/MO</span></div>
+      <div class="card"><span class="card-icon">🌐</span><div class="card-title">No-Code Web</div><p class="card-desc">Launch your website without a developer. I build with GitHub Pages and teach you to maintain it yourself.</p><span class="card-price">PROJECT-BASED</span></div>
+      <div class="card"><span class="card-icon">📱</span><div class="card-title">AI Content Strategy</div><p class="card-desc">Build your brand with AI-powered TikTok, Instagram Reels, and social content. I teach the system, not just tools.</p><span class="card-price">$95–125/HR</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ AI TOOLS PAGE ═══════════════ -->
+<div class="page" id="p-tools">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:44px;">
+      <div class="section-kicker" style="justify-content:center;">My Toolkit</div>
+      <h2 class="section-title" style="text-align:center;">AI Tools I Teach <em>&amp; Use</em> Daily</h2>
+      <p style="font-size:14px;color:var(--muted);text-align:center;max-width:500px;margin:0 auto;">Every tool I teach is one I use in my own businesses — nothing theoretical, all practical.</p>
+    </div>
+    <div class="card reveal" style="margin-bottom:20px;">
+      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--teal);margin-bottom:16px;">⭐ FEATURED / MOST-TAUGHT</div>
+      <div class="tools-grid">
+        <span class="tool-pill featured">ChatGPT (GPT-4o)</span>
+        <span class="tool-pill featured">Claude AI</span>
+        <span class="tool-pill featured">Microsoft Copilot</span>
+        <span class="tool-pill featured">Zapier</span>
+        <span class="tool-pill featured">Make.com</span>
+        <span class="tool-pill featured">Power Automate</span>
+      </div>
+    </div>
+    <div class="card reveal">
+      <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin-bottom:16px;">🛠 FULL TOOL LIBRARY</div>
+      <div class="tools-grid">
+        <span class="tool-pill">HeyGen (AI Video)</span>
+        <span class="tool-pill">ElevenLabs</span>
+        <span class="tool-pill">Midjourney</span>
+        <span class="tool-pill">GitHub Pages</span>
+        <span class="tool-pill">Google AI Studio</span>
+        <span class="tool-pill">Notion AI</span>
+        <span class="tool-pill">Perplexity AI</span>
+        <span class="tool-pill">Cursor AI</span>
+        <span class="tool-pill">Lovable</span>
+        <span class="tool-pill">Bolt.new</span>
+        <span class="tool-pill">n8n</span>
+        <span class="tool-pill">Airtable</span>
+        <span class="tool-pill">DataAnnotation</span>
+        <span class="tool-pill">Outlier AI</span>
+        <span class="tool-pill">Adobe Firefly</span>
+        <span class="tool-pill">Google Jarvis AI</span>
+        <span class="tool-pill">Gemini</span>
+        <span class="tool-pill">Grok</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PRICING PAGE ═══════════════ -->
+<div class="page" id="p-pricing">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:50px;">
+      <div class="section-kicker" style="justify-content:center;">Investment</div>
+      <h2 class="section-title" style="text-align:center;">Simple, <em>Transparent</em> Pricing</h2>
+      <p style="font-size:14px;color:var(--muted);text-align:center;">First 15-minute consultation is always free. Let's figure out what you need.</p>
+    </div>
+    <div class="price-grid reveal">
+      <div class="price-card">
+        <div class="price-label">Single Session</div>
+        <div class="price-val">$125</div>
+        <span class="price-unit">per hour</span>
+        <ul class="price-features">
+          <li>1-on-1 video call</li>
+          <li>AI tool training</li>
+          <li>Custom prompt creation</li>
+          <li>Recording included</li>
+          <li>Follow-up notes</li>
+        </ul>
+        <a href="mailto:laureennicholson635@gmail.com" class="btn btn-outline" style="width:100%;justify-content:center;">Book Now</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-label">Bundle</div>
+        <div class="price-val">$350</div>
+        <span class="price-unit">3-session package</span>
+        <ul class="price-features">
+          <li>3 × 1-hour sessions</li>
+          <li>Full workflow audit</li>
+          <li>Custom automation build</li>
+          <li>All session recordings</li>
+          <li>30-day email support</li>
+          <li>Priority scheduling</li>
+        </ul>
+        <a href="mailto:laureennicholson635@gmail.com" class="btn btn-teal" style="width:100%;justify-content:center;">Best Value ⚡</a>
+      </div>
+      <div class="price-card">
+        <div class="price-label">Monthly Retainer</div>
+        <div class="price-val">$1,500</div>
+        <span class="price-unit">per month</span>
+        <ul class="price-features">
+          <li>Ongoing consulting</li>
+          <li>Unlimited questions</li>
+          <li>New tool evaluations</li>
+          <li>Priority response</li>
+          <li>Healthcare/RCM focus</li>
+          <li>Monthly strategy call</li>
+        </ul>
+        <a href="mailto:laureennicholson635@gmail.com" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ FAQ PAGE ═══════════════ -->
+<div class="page" id="p-faq">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:44px;">
+      <div class="section-kicker" style="justify-content:center;">Questions?</div>
+      <h2 class="section-title" style="text-align:center;">Things People <em>Always</em> Ask Me</h2>
+    </div>
+    <div style="max-width:760px;margin:0 auto;" class="reveal">
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Do I need to be technical to work with you? <span class="faq-arrow">▼</span></div><div class="faq-a">Not at all. My entire approach is designed for non-technical people. If you can send an email, you can learn to use AI. I meet you exactly where you are — no jargon, no judgment, ever.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Are sessions remote? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes — 100% remote. All sessions via video call. Based in Brandon, FL but work with clients across the US and beyond.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Do you work with healthcare organizations? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes, and this is one of my specialties. 10+ years in RCM and medical billing. I understand HIPAA deeply and build workflows that are safe, compliant, and practical. Visit automatedrcm.com for my dedicated healthcare AI service.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Can you help me make money with AI? <span class="faq-arrow">▼</span></div><div class="faq-a">Yes. AI training and annotation pays $40–60/hr. Automation consulting pays $85–175/hr. AI content creation builds entire income streams. I help you find the right path and give you a realistic roadmap.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">What makes you different from other AI coaches? <span class="faq-arrow">▼</span></div><div class="faq-a">Three things: (1) I use every tool I teach in my own businesses — this isn't theory. (2) Real 10-year healthcare background most AI coaches don't have. (3) I teach publicly on TikTok so you can see my style before booking.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">What's the first step? <span class="faq-arrow">▼</span></div><div class="faq-a">Email me at laureennicholson635@gmail.com or use the Book Me page. First 15-minute consultation is always free. We'll talk about what you need, where you are, and what makes the most sense. Zero pressure.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Where can I find your website and resources? <span class="faq-arrow">▼</span></div><div class="faq-a">Visit learningaiwithlaureen.com for my portfolio, free resources, tutorials, and to book sessions. You can also follow me @LearningAIwithLaureen on TikTok for daily free AI education.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTACT PAGE ═══════════════ -->
+<div class="page" id="p-contact">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <div class="section-kicker" style="justify-content:center;">Let's Connect</div>
+      <h2 class="section-title" style="text-align:center;">Book a Session or <em>Say Hello</em></h2>
+      <p style="font-size:14px;color:var(--muted);text-align:center;">First 15-minute consultation is free. I respond to every email within 24 hours.</p>
+    </div>
+    <div class="g2 reveal" style="align-items:start;gap:40px;">
+      <div>
+        <a href="mailto:laureennicholson635@gmail.com" class="contact-link">
+          <span class="ci">✉</span>
+          <div class="cl"><div class="cl-title">Email Me Directly</div><div class="cl-sub">laureennicholson635@gmail.com · 24hr response</div></div>
+          <span class="ca">→</span>
+        </a>
+        <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank" class="contact-link">
+          <span class="ci">🎵</span>
+          <div class="cl"><div class="cl-title">Follow on TikTok</div><div class="cl-sub">@LearningAIwithLaureen · daily AI education</div></div>
+          <span class="ca">→</span>
+        </a>
+        <a href="https://learningaiwithlaureen.com" target="_blank" class="contact-link">
+          <span class="ci">🌐</span>
+          <div class="cl"><div class="cl-title">learningaiwithlaureen.com</div><div class="cl-sub">Portfolio, services & free resources</div></div>
+          <span class="ca">→</span>
+        </a>
+        <a href="https://automatedrcm.com" target="_blank" class="contact-link">
+          <span class="ci">🏥</span>
+          <div class="cl"><div class="cl-title">Healthcare AI — automatedrcm.com</div><div class="cl-sub">AI-powered RCM & medical billing automation</div></div>
+          <span class="ca">→</span>
+        </a>
+      </div>
+      <div class="card">
+        <div style="font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--teal);margin-bottom:18px;">SEND A MESSAGE</div>
+        <div class="form-group"><label class="form-label">Your Name</label><input class="form-ctrl" id="cn" placeholder="What should I call you?"></div>
+        <div class="form-group"><label class="form-label">What Do You Need Help With?</label><input class="form-ctrl" id="cs" placeholder="e.g. I want to automate my email workflow"></div>
+        <div class="form-group"><label class="form-label">Tell Me More</label><textarea class="form-ctrl" id="cm" placeholder="Any details about your business, goals, or questions..."></textarea></div>
+        <button class="btn btn-teal" style="width:100%;justify-content:center;" onclick="sendMsg()">Send Message ⚡</button>
+        <p style="text-align:center;font-size:11px;color:var(--soft);margin-top:12px;">Or email directly: laureennicholson635@gmail.com</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <div class="footer-logo">Learning AI with Laureen</div>
+  <div class="footer-links">
+    <a href="https://learningaiwithlaureen.com" target="_blank">learningaiwithlaureen.com</a>
+    <a href="https://automatedrcm.com" target="_blank">automatedrcm.com</a>
+    <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank">TikTok</a>
+    <a href="mailto:laureennicholson635@gmail.com">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Laureen Nicholson · Brandon, FL · Remote Only · learningaiwithlaureen.com</div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+/* ══════════════════════════════
+   NAVIGATION
+══════════════════════════════ */
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(n => n.classList.remove('active'));
+  document.getElementById('p-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(triggerReveal, 100);
+}
+
+/* ══════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════ */
+function triggerReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+}
+
+// Initial reveal
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(triggerReveal, 200);
+  spawnParticles();
+});
+
+/* ══════════════════════════════
+   FLOATING PARTICLES
+   (inspired by neural network + smart city images)
+══════════════════════════════ */
+function spawnParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#00d4ff','#ffb800','#ff6eb4','#7c3aed','#00ffcc','#00ff88'];
+  const sizes = [2,3,4,2,3,2];
+
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = sizes[Math.floor(Math.random() * sizes.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const left = Math.random() * 100;
+    const duration = 8 + Math.random() * 16;
+    const delay = Math.random() * 20;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${left}%;
+      background:${color};
+      box-shadow:0 0 ${size*3}px ${color};
+      animation-duration:${duration}s;
+      animation-delay:${delay}s;
+    `;
+    container.appendChild(p);
+  }
+}
+
+/* ══════════════════════════════
+   CONTACT FORM
+══════════════════════════════ */
+function sendMsg() {
+  const name = document.getElementById('cn').value;
+  const subj = document.getElementById('cs').value;
+  const msg  = document.getElementById('cm').value;
+  if (!name || !subj) { alert('Please fill in your name and what you need help with!'); return; }
+  const body = `Hi Laureen,%0D%0A%0D%0AMy name is ${encodeURIComponent(name)}.%0D%0A%0D%0AI need help with: ${encodeURIComponent(subj)}%0D%0A%0D%0A${encodeURIComponent(msg)}%0D%0A%0D%0AFound you at: learningaiwithlaureen.com`;
+  window.location.href = `mailto:laureennicholson635@gmail.com?subject=Session Request — ${encodeURIComponent(subj)}&body=${body}`;
+}
+
+/* ══════════════════════════════
+   STAGGERED CARD ANIMATIONS
+══════════════════════════════ */
+document.querySelectorAll('.g3 .card, .g2 .card, .g4 .card').forEach((card, i) => {
+  card.style.transitionDelay = `${i * 0.08}s`;
+});
+</script>
+
+</body>
+</html>
