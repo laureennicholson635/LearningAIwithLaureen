@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning AI with Laureen — AI Made Warm, Simple & Powerful</title>
+<meta name="description" content="Laureen Nicholson — AI Educator making artificial intelligence approachable, warm, and profitable. TikTok creator, automation expert, healthcare AI specialist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════
+   LAUREEN'S AI — WARM FUTURISTIC BRAND
+   Colors: Cream, warm gold, electric blue, soft lavender
+   NOT dark. NOT cold. Warm. Human. Aspirational.
+═══════════════════════════════════ */
+:root {
+  --cream:    #faf7f2;
+  --warm-white: #fff9f2;
+  --gold:     #c9a84c;
+  --gold-lt:  #e8c96a;
+  --gold-dk:  #9a7a2f;
+  --blue:     #2196f3;
+  --blue-lt:  #64b5f6;
+  --blue-dk:  #0d47a1;
+  --lavender: #9c7fe8;
+  --lav-lt:   #c5b3f5;
+  --lav-dk:   #6d4ed4;
+  --slate:    #3a3a4a;
+  --mid:      #6b6b80;
+  --soft:     #9999aa;
+  --border:   rgba(201,168,76,0.2);
+  --card-bg:  rgba(255,255,255,0.85);
+  --glow-gold: rgba(201,168,76,0.15);
+  --glow-blue: rgba(33,150,243,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--slate);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(33,150,243,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(156,127,232,0.05) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.app { position:relative; z-index:1; }
+
+/* ── HEADER ── */
+.header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 48px;
+  background:rgba(250,247,242,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:100;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.logo {
+  display:flex;
+  flex-direction:column;
+  line-height:1;
+}
+
+.logo-script {
+  font-family:'Dancing Script', cursive;
+  font-size:clamp(22px,4vw,34px);
+  font-weight:700;
+  color: var(--gold-dk);
+  letter-spacing:1px;
+}
+
+.logo-sub {
+  font-family:'Montserrat', sans-serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color: var(--blue);
+}
+
+.nav {
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap;
+}
+
+.nav-link {
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:7px 16px;
+  border-radius:30px;
+  border:none;
+  background:none;
+  color:var(--mid);
+  cursor:pointer;
+  transition:all .2s;
+  font-family:'Montserrat',sans-serif;
+}
+
+.nav-link:hover, .nav-link.active {
+  background:var(--glow-gold);
+  color:var(--gold-dk);
+}
+
+.header-btns { display:flex; gap:8px; }
+
+.btn {
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:10px 22px;
+  border-radius:30px;
+  cursor:pointer;
+  transition:all .25s;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:none;
+}
+
+.btn-gold {
+  background:linear-gradient(135deg, var(--gold), var(--gold-dk));
+  color:#fff;
+  box-shadow:0 4px 16px rgba(201,168,76,0.3);
+}
+
+.btn-gold:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(201,168,76,0.4);
+}
+
+.btn-outline {
+  border:1.5px solid var(--gold);
+  color:var(--gold-dk);
+  background:transparent;
+}
+
+.btn-outline:hover {
+  background:var(--glow-gold);
+  transform:translateY(-1px);
+}
+
+/* ── PAGES ── */
+.page { display:none; }
+.page.active { display:block; }
+
+/* ── HERO ── */
+.hero {
+  min-height:90vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:40px;
+  padding:60px 48px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+@media(max-width:768px) {
+  .hero { grid-template-columns:1fr; padding:40px 24px; min-height:auto; }
+  .hero-visual { order:-1; }
+}
+
+.hero-eyebrow {
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(18px,2.5vw,24px);
+  color:var(--gold);
+  margin-bottom:8px;
+  display:block;
+}
+
+.hero-title {
+  font-family:'Playfair Display', serif;
+  font-size:clamp(36px,5vw,62px);
+  font-weight:800;
+  line-height:1.1;
+  color:var(--slate);
+  margin-bottom:16px;
+}
+
+.hero-title em {
+  font-style:italic;
+  background:linear-gradient(135deg, var(--blue), var(--lavender));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-sub {
+  font-size:15px;
+  font-weight:300;
+  color:var(--mid);
+  line-height:1.9;
+  margin-bottom:28px;
+  max-width:520px;
+}
+
+.hero-sub strong { color:var(--slate); font-weight:600; }
+
+.hero-cta { display:flex; gap:12px; flex-wrap:wrap; }
+
+.hero-badges {
+  display:flex;
+  gap:10px;
+  margin-top:24px;
+  flex-wrap:wrap;
+}
+
+.badge {
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1px;
+  padding:5px 14px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  color:var(--mid);
+  background:var(--card-bg);
+}
+
+/* ── HERO VISUAL ── */
+.hero-visual {
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-img-wrap {
+  position:relative;
+  width:100%;
+  max-width:480px;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 20px 60px rgba(201,168,76,0.15),
+    0 0 80px rgba(33,150,243,0.08);
+}
+
+.hero-img-wrap img {
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  display:block;
+}
+
+.hero-img-overlay {
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(250,247,242,0.4) 100%
+  );
+}
+
+/* floating cards */
+.float-card {
+  position:absolute;
+  background:var(--card-bg);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px 16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.08);
+  font-size:11px;
+  font-weight:600;
+  animation:float 6s ease-in-out infinite;
+}
+
+.float-card.top-left {
+  top:24px; left:-20px;
+  animation-delay:0s;
+  color:var(--gold-dk);
+  border-color:rgba(201,168,76,0.3);
+}
+
+.float-card.bottom-right {
+  bottom:40px; right:-20px;
+  animation-delay:3s;
+  color:var(--blue-dk);
+  border-color:rgba(33,150,243,0.25);
+}
+
+@keyframes float {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+/* ── SECTION WRAPPER ── */
+.section {
+  padding:72px 48px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+@media(max-width:768px){
+  .section{padding:48px 24px;}
+  .header{padding:16px 24px;}
+}
+
+.section-eyebrow {
+  font-family:'Dancing Script',cursive;
+  font-size:20px;
+  color:var(--gold);
+  display:block;
+  margin-bottom:6px;
+}
+
+.section-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,4vw,42px);
+  font-weight:800;
+  color:var(--slate);
+  margin-bottom:14px;
+  line-height:1.2;
+}
+
+.section-title em {
+  font-style:italic;
+  color:var(--lavender);
+}
+
+.section-sub {
+  font-size:14px;
+  color:var(--mid);
+  line-height:1.8;
+  max-width:580px;
+  margin-bottom:36px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin:0 48px;
+  opacity:.35;
+}
+.divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.divider-icon{color:var(--gold);font-size:16px;}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:900px){.g3{grid-template-columns:1fr 1fr;}.g4{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr;}}
+
+/* ── CARDS ── */
+.card {
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px;
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--lavender),var(--blue));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(201,168,76,0.12);
+  border-color:rgba(201,168,76,0.3);
+}
+
+.card:hover::before { transform:scaleX(1); }
+
+.card-icon {
+  font-size:28px;
+  margin-bottom:12px;
+  display:block;
+}
+
+.card-title {
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:700;
+  color:var(--slate);
+  margin-bottom:8px;
+}
+
+.card-desc {
+  font-size:13px;
+  color:var(--mid);
+  line-height:1.7;
+}
+
+.card-price {
+  font-size:13px;
+  font-weight:700;
+  color:var(--gold-dk);
+  margin-top:12px;
+  display:block;
+}
+
+/* ── FEATURE WITH IMAGE ── */
+.feature-split {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+  padding:60px 48px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+@media(max-width:768px){
+  .feature-split{grid-template-columns:1fr;padding:40px 24px;gap:32px;}
+  .feature-split.reverse .feature-img{order:-1;}
+}
+
+.feature-img {
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.08), 0 0 0 1px var(--border);
+}
+
+.feature-img img {
+  width:100%;
+  height:360px;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s;
+}
+
+.feature-img:hover img { transform:scale(1.03); }
+
+.feature-text {}
+.feature-list { list-style:none; margin-top:16px; }
+.feature-list li {
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  color:var(--mid);
+  line-height:1.6;
+}
+.feature-list li:last-child{border-bottom:none;}
+.feature-list li strong{color:var(--slate);}
+.fl-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+
+/* ── QUOTE BAND ── */
+.quote-band {
+  background:linear-gradient(135deg, rgba(201,168,76,0.08), rgba(156,127,232,0.08));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:56px 48px;
+  text-align:center;
+}
+
+.quote-text {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,3.5vw,36px);
+  font-weight:700;
+  font-style:italic;
+  color:var(--slate);
+  max-width:800px;
+  margin:0 auto 16px;
+  line-height:1.4;
+}
+
+.quote-author {
+  font-family:'Dancing Script',cursive;
+  font-size:20px;
+  color:var(--gold);
+}
+
+/* ── TOOLS SECTION ── */
+.tools-grid {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:8px;
+}
+
+.tool-pill {
+  font-size:12px;
+  font-weight:600;
+  padding:8px 18px;
+  border-radius:30px;
+  border:1.5px solid var(--border);
+  color:var(--mid);
+  background:var(--card-bg);
+  transition:all .2s;
+  cursor:default;
+}
+
+.tool-pill:hover {
+  border-color:var(--gold);
+  color:var(--gold-dk);
+  background:var(--glow-gold);
+  transform:translateY(-2px);
+}
+
+.tool-pill.featured {
+  border-color:rgba(201,168,76,0.5);
+  color:var(--gold-dk);
+  background:rgba(201,168,76,0.08);
+  font-weight:700;
+}
+
+/* ── PRICING ── */
+.pricing-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:8px;
+}
+
+@media(max-width:768px){.pricing-grid{grid-template-columns:1fr;}}
+
+.price-card {
+  background:var(--card-bg);
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  padding:28px 24px;
+  text-align:center;
+  transition:all .25s;
+  position:relative;
+}
+
+.price-card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(201,168,76,0.1);
+}
+
+.price-card.featured {
+  border-color:var(--gold);
+  background:linear-gradient(180deg,rgba(201,168,76,0.06),var(--card-bg));
+}
+
+.price-card.featured::after {
+  content:'✦ Most Popular';
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--gold),var(--gold-dk));
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  padding:4px 16px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.price-label {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--soft);
+  margin-bottom:8px;
+}
+
+.price-val {
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  font-weight:800;
+  color:var(--slate);
+  line-height:1;
+}
+
+.price-unit {
+  font-size:12px;
+  color:var(--soft);
+  margin-bottom:16px;
+  display:block;
+  margin-top:4px;
+}
+
+.price-features {
+  list-style:none;
+  text-align:left;
+  margin-bottom:20px;
+}
+
+.price-features li {
+  font-size:12px;
+  color:var(--mid);
+  padding:6px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.price-features li:last-child{border-bottom:none;}
+.price-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;}
+
+/* ── CONTACT ── */
+.contact-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:start;
+}
+
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr;}}
+
+.contact-link {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:16px 18px;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:14px;
+  text-decoration:none;
+  transition:all .2s;
+  margin-bottom:10px;
+}
+
+.contact-link:hover {
+  border-color:var(--gold);
+  transform:translateX(4px);
+  box-shadow:0 8px 24px rgba(201,168,76,0.1);
+}
+
+.contact-icon { font-size:22px; width:36px; text-align:center; flex-shrink:0; }
+.contact-info { flex:1; }
+.contact-title { font-size:13px; font-weight:700; color:var(--slate); margin-bottom:2px; }
+.contact-sub { font-size:11px; color:var(--soft); }
+.contact-arrow { color:var(--gold); font-size:18px; }
+
+/* ── FORM ── */
+.form-group { margin-bottom:14px; }
+
+.form-label {
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--mid);
+  margin-bottom:6px;
+}
+
+.form-control {
+  width:100%;
+  background:var(--warm-white);
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:11px 14px;
+  color:var(--slate);
+  font-family:'Montserrat',sans-serif;
+  font-size:13px;
+  outline:none;
+  transition:border-color .2s;
+}
+
+.form-control:focus { border-color:var(--gold); }
+textarea.form-control { resize:vertical; min-height:90px; }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display:flex;
+  background:linear-gradient(135deg,rgba(201,168,76,0.07),rgba(156,127,232,0.07));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.stat {
+  flex:1;
+  padding:28px 16px;
+  text-align:center;
+  border-right:1px solid var(--border);
+}
+
+.stat:last-child{border-right:none;}
+
+.stat-val {
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:800;
+  color:var(--gold-dk);
+  display:block;
+  line-height:1;
+  margin-bottom:4px;
+}
+
+.stat-label {
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+
+/* ── FAQ ── */
+.faq-item {
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px 20px;
+  margin-bottom:8px;
+  cursor:pointer;
+  transition:all .2s;
+}
+
+.faq-item:hover { border-color:rgba(201,168,76,0.35); }
+.faq-item.open { border-color:var(--gold); }
+
+.faq-q {
+  font-size:14px;
+  font-weight:600;
+  color:var(--slate);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.faq-arrow { color:var(--gold); transition:transform .2s; font-size:16px; }
+.faq-item.open .faq-arrow { transform:rotate(180deg); }
+
+.faq-a {
+  display:none;
+  font-size:13px;
+  color:var(--mid);
+  line-height:1.8;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+}
+
+.faq-item.open .faq-a { display:block; }
+
+/* ── FOOTER ── */
+.footer {
+  background:var(--slate);
+  color:rgba(255,255,255,0.6);
+  padding:40px 48px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+.footer-logo {
+  font-family:'Dancing Script',cursive;
+  font-size:24px;
+  color:var(--gold-lt);
+}
+
+.footer-links { display:flex; gap:20px; flex-wrap:wrap; }
+.footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:12px; transition:color .2s; }
+.footer-links a:hover { color:var(--gold-lt); }
+.footer-copy { font-size:11px; }
+
+/* ── SCROLL ANIMATE ── */
+.reveal {
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .6s, transform .6s;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── LIVE DOT ── */
+.live-dot {
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 8px var(--gold);
+  animation:pdot 2s infinite;
+  display:inline-block;
+}
+@keyframes pdot{0%,100%{opacity:1}50%{opacity:.3}}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="logo">
+    <span class="logo-script">Learning AI with Laureen</span>
+    <span class="logo-sub">AI Educator · Automation Expert · Digital Products</span>
+  </div>
+  <nav class="nav">
+    <button class="nav-link active" onclick="showPage('home',this)">Home</button>
+    <button class="nav-link" onclick="showPage('about',this)">About</button>
+    <button class="nav-link" onclick="showPage('services',this)">Services</button>
+    <button class="nav-link" onclick="showPage('tools',this)">AI Tools</button>
+    <button class="nav-link" onclick="showPage('pricing',this)">Pricing</button>
+    <button class="nav-link" onclick="showPage('faq',this)">FAQ</button>
+    <button class="nav-link" onclick="showPage('contact',this)">Book Me</button>
+    <a href="https://https://laureenlight.gumroad.com/l/inlssx" class="btn btn-gold" style="font-size:11px;padding:8px 18px;">🛍️ Shop</a>
+  </nav>
+  <div class="header-btns">
+    <a href="https://https://laureenlight.gumroad.com/l/cvvri" class="btn btn-gold">↓ Free Prompt Guide</a>
+  </div>
+</div>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="p-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text reveal">
+      <span class="hero-eyebrow">Welcome, I'm Laureen ✦</span>
+      <h1 class="hero-title">
+        AI Doesn't Have to Be <em>Scary.</em>
+        I'll Show You How Easy It Can Be.
+      </h1>
+      <p class="hero-sub">
+        I'm an AI educator, automation architect, and healthcare expert who makes
+        <strong>artificial intelligence feel warm, approachable, and profitable.</strong>
+        Whether you're a small business owner, a solopreneur, or a healthcare team —
+        I meet you exactly where you are.
+      </p>
+      <div class="hero-cta">
+        <a href="https://https://laureenlight.gumroad.com/l/inlssx" class="btn btn-gold">🛍️ Get 100 AI Prompts — $27</a>
+        <a href="https://https://laureenlight.gumroad.com/l/cvvri" class="btn btn-outline">↓ Free Guide First</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge"><span class="live-dot"></span> Available Now</span>
+        <span class="badge">✦ 10+ Years Healthcare</span>
+        <span class="badge">✦ 100% Remote</span>
+        <span class="badge">✦ Digital Products</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hero-img-wrap">
+        <!-- AI Brain / Futuristic glowing image from Unsplash -->
+        <img
+          src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop&q=80"
+          alt="AI visualization — warm and beautiful"
+          onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=80'"
+        >
+        <div class="hero-img-overlay"></div>
+      </div>
+      <div class="float-card top-left">✨ AI Made Simple</div>
+      <div class="float-card bottom-right">🎉 Free Prompt Guide ↓</div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-val">10+</span><span class="stat-label">Years Healthcare</span></div>
+    <div class="stat"><span class="stat-val">6+</span><span class="stat-label">AI Platforms</span></div>
+    <div class="stat"><span class="stat-val">2</span><span class="stat-label">AI Businesses</span></div>
+    <div class="stat"><span class="stat-val">$0</span><span class="stat-label">To Get Started</span></div>
+  </div>
+
+  <!-- FEATURE SPLIT 1 -->
+  <div class="feature-split reveal">
+    <div class="feature-img">
+      <img
+        src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop&q=80"
+        alt="Warm futuristic AI workspace"
+        onerror="this.src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80'"
+      >
+    </div>
+    <div class="feature-text">
+      <span class="section-eyebrow">Why People Love Working With Me</span>
+      <h2 class="section-title">AI Should Feel Like a <em>Superpower,</em> Not a Headache</h2>
+      <p class="section-sub">Most AI training feels overwhelming and cold. I do it differently — warm, practical, and tailored to YOU.</p>
+      <ul class="feature-list">
+        <li><span class="fl-icon">🌟</span><div><strong>Practical, not theoretical.</strong> Every session includes real workflows you can use the same day.</div></li>
+        <li><span class="fl-icon">💛</span><div><strong>Warm & patient approach.</strong> No jargon. No judgment. I meet you exactly where you are.</div></li>
+        <li><span class="fl-icon">⚡</span><div><strong>Digital products that work while you sleep.</strong> Prompt packs, guides, and tools you can download and use today.</div></li>
+        <li><span class="fl-icon">🚀</span><div><strong>Results on day one.</strong> You leave every session with something actually working.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- QUOTE BAND -->
+  <div class="quote-band reveal">
+    <p class="quote-text">"AI isn't replacing humans — it's giving the right humans an unfair advantage. Let's make sure you're one of them."</p>
+    <span class="quote-author">— Laureen Nicholson</span>
+  </div>
+
+  <!-- FEATURE SPLIT 2 -->
+  <div class="feature-split reverse reveal">
+    <div class="feature-text">
+      <span class="section-eyebrow">Two Businesses, One Mission</span>
+      <h2 class="section-title">Teaching AI. <em>Building</em> AI. Living AI.</h2>
+      <p class="section-sub">I don't just teach AI tools — I run two businesses powered by them every single day.</p>
+      <ul class="feature-list">
+        <li><span class="fl-icon">🎵</span><div><strong>@LearningAIwithLaureen on TikTok.</strong> Daily AI tips, tool reviews, and no-code tutorials for everyone from beginners to pros.</div></li>
+        <li><span class="fl-icon">🛍️</span><div><strong>Digital product shop</strong> — AI prompt packs and guides you can download instantly and use in your business today.</div></li>
+        <li><span class="fl-icon">⚡</span><div><strong>Zapier · Make.com · Power Automate</strong> — I build the automations that eliminate repetitive work permanently.</div></li>
+      </ul>
+      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="https://https://laureenlight.gumroad.com/l/inlssx" class="btn btn-gold">Get 100 AI Prompts — $27 →</a>
+        <a href="https://https://laureenlight.gumroad.com/l/cvvri" class="btn btn-outline">Free Guide ↓</a>
+      </div>
+    </div>
+    <div class="feature-img">
+      <img
+        src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80"
+        alt="Modern tech workspace with warm lighting"
+        onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80'"
+      >
+    </div>
+  </div>
+
+  <!-- SERVICES PREVIEW -->
+  <div class="section reveal">
+    <div style="text-align:center;margin-bottom:36px;">
+      <span class="section-eyebrow">What I Can Do For You</span>
+      <h2 class="section-title" style="text-align:center;">Services That <em>Transform</em> How You Work</h2>
+    </div>
+    <div class="g3">
+      <div class="card">
+        <span class="card-icon">🤖</span>
+        <div class="card-title">AI Tool Training</div>
+        <p class="card-desc">1-on-1 coaching on ChatGPT, Claude, Copilot, and more. Hands-on, practical, and tailored to your exact business.</p>
+        <span class="card-price">From $95/hr</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <div class="card-title">Workflow Automation</div>
+        <p class="card-desc">Zapier, Make.com & Power Automate — I build the systems that eliminate your most time-consuming tasks permanently.</p>
+        <span class="card-price">From $100/hr</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🛍️</span>
+        <div class="card-title">Digital Products</div>
+        <p class="card-desc">Copy-paste AI prompt packs and guides designed for small business owners. Instant download. Use them in your business today.</p>
+        <a href="https://https://laureenlight.gumroad.com/l/inlssx" class="card-price" style="color:var(--gold-dk);text-decoration:none;">Shop Now — From $27 →</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:28px;">
+      <button onclick="showPage('services',document.querySelectorAll('.nav-link')[2])" class="btn btn-outline">See All Services →</button>
+    </div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ═══ ABOUT ═══ -->
+<div class="page" id="p-about">
+  <div class="section reveal">
+    <div class="g2" style="align-items:center;gap:48px;">
+      <div>
+        <span class="section-eyebrow">My Story</span>
+        <h2 class="section-title">From Healthcare Billing to <em>AI Pioneer</em></h2>
+        <p style="font-size:14px;color:var(--mid);line-height:1.9;margin-bottom:16px;">
+          I spent over 10 years deep in medical billing and Revenue Cycle Management — learning every system, every payer rule, every workflow. And then AI arrived and changed everything.
+        </p>
+        <p style="font-size:14px;color:var(--mid);line-height:1.9;margin-bottom:16px;">
+          I didn't just use it. I dove in headfirst — mastering ChatGPT, Claude, Copilot, Zapier, Make.com, and dozens of other tools. I built two businesses powered by AI. I started teaching on TikTok. And now I help others do the same.
+        </p>
+        <p style="font-size:14px;color:var(--mid);line-height:1.9;margin-bottom:24px;">
+          My mission is simple: <strong style="color:var(--slate);">make AI feel warm, approachable, and profitable</strong> for anyone willing to learn — no matter your technical background.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="mailto:laureennicholson635@gmail.com" class="btn btn-gold">✉ Work With Me</a>
+          <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank" class="btn btn-outline">Follow My Journey →</a>
+        </div>
+      </div>
+      <div>
+        <div class="feature-img">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&auto=format&fit=crop&q=80" alt="Professional woman working with technology" style="height:460px;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-val">10+</span><span class="stat-label">Years Healthcare RCM</span></div>
+    <div class="stat"><span class="stat-val">6+</span><span class="stat-label">AI Platforms Mastered</span></div>
+    <div class="stat"><span class="stat-val">2</span><span class="stat-label">AI-Powered Businesses</span></div>
+    <div class="stat"><span class="stat-val">100%</span><span class="stat-label">Remote & Flexible</span></div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<div class="page" id="p-services">
+  <div class="section">
+    <div style="text-align:center;margin-bottom:40px;" class="reveal">
+      <span class="section-eyebrow">What I Offer</span>
+      <h2 class="section-title" style="text-align:center;">Services Designed for <em>Real Results</em></h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center;">No fluff. No overwhelm. Just practical AI skills that change how you work.</p>
+    </div>
+    <div class="g3 reveal">
+      <div class="card">
+        <span class="card-icon">🤖</span>
+        <div class="card-title">AI Tool Training</div>
+        <p class="card-desc">1-on-1 coaching to master ChatGPT, Claude, Copilot, and more. Every session is hands-on and tailored to your specific business goals.</p>
+        <span class="card-price">$95–125/hr</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <div class="card-title">Workflow Automation</div>
+        <p class="card-desc">Zapier, Make.com & Power Automate — I build the automations that permanently eliminate your most tedious, repetitive tasks.</p>
+        <span class="card-price">$100–150/hr</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">💬</span>
+        <div class="card-title">Prompt Engineering</div>
+        <p class="card-desc">Custom prompts and prompt systems engineered to get consistent, high-quality results from AI every single time you use it.</p>
+        <span class="card-price">$95–125/hr</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🛍️</span>
+        <div class="card-title">Digital Products</div>
+        <p class="card-desc">Instant-download AI prompt packs and guides for small business owners. 100 prompts across 10 business categories — copy, paste, save hours every week.</p>
+        <a href="https://https://laureenlight.gumroad.com/l/inlssx" style="color:var(--gold-dk);font-weight:700;font-size:13px;text-decoration:none;">Shop — From $27 →</a>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌐</span>
+        <div class="card-title">No-Code Web</div>
+        <p class="card-desc">Launch your website without a developer. I build it with GitHub Pages, HTML/CSS/JS and teach you to maintain it yourself going forward.</p>
+        <span class="card-price">Project-based</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">📱</span>
+        <div class="card-title">AI Content Strategy</div>
+        <p class="card-desc">Build your brand with AI-powered TikTok, Instagram Reels, and social content. I teach the system — not just the individual tools.</p>
+        <span class="card-price">$95–125/hr</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AI TOOLS ═══ -->
+<div class="page" id="p-tools">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:36px;">
+      <span class="section-eyebrow">My Toolkit</span>
+      <h2 class="section-title" style="text-align:center;">AI Tools I Teach <em>&amp; Use</em> Daily</h2>
+    </div>
+    <div class="card reveal" style="margin-bottom:20px;">
+      <div class="card-title" style="margin-bottom:14px;">⭐ Featured / Most-Taught Tools</div>
+      <div class="tools-grid">
+        <span class="tool-pill featured">ChatGPT (GPT-4o)</span>
+        <span class="tool-pill featured">Claude AI</span>
+        <span class="tool-pill featured">Microsoft Copilot</span>
+        <span class="tool-pill featured">Zapier</span>
+        <span class="tool-pill featured">Make.com</span>
+        <span class="tool-pill featured">Power Automate</span>
+      </div>
+    </div>
+    <div class="card reveal">
+      <div class="card-title" style="margin-bottom:14px;">🛠 Full Tool Library</div>
+      <div class="tools-grid">
+        <span class="tool-pill">HeyGen (AI Video)</span>
+        <span class="tool-pill">ElevenLabs</span>
+        <span class="tool-pill">Midjourney</span>
+        <span class="tool-pill">GitHub Pages</span>
+        <span class="tool-pill">Google AI Studio</span>
+        <span class="tool-pill">Notion AI</span>
+        <span class="tool-pill">Perplexity AI</span>
+        <span class="tool-pill">Cursor AI</span>
+        <span class="tool-pill">Lovable</span>
+        <span class="tool-pill">Bolt.new</span>
+        <span class="tool-pill">n8n</span>
+        <span class="tool-pill">Airtable</span>
+        <span class="tool-pill">DataAnnotation</span>
+        <span class="tool-pill">Outlier AI</span>
+        <span class="tool-pill">Adobe Firefly</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRICING ═══ -->
+<div class="page" id="p-pricing">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:36px;">
+      <span class="section-eyebrow">Investment</span>
+      <h2 class="section-title" style="text-align:center;">Simple, <em>Transparent</em> Pricing</h2>
+      <p style="font-size:14px;color:var(--mid);text-align:center;">First 15-minute consultation is always free. Let's figure out what you need.</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-label">Single Session</div>
+        <div class="price-val">$125</div>
+        <span class="price-unit">per hour</span>
+        <ul class="price-features">
+          <li>1-on-1 video call</li>
+          <li>AI tool training</li>
+          <li>Custom prompt creation</li>
+          <li>Recording included</li>
+          <li>Follow-up notes</li>
+        </ul>
+        <a href="mailto:laureennicholson635@gmail.com?subject=Single Session Booking" class="btn btn-outline" style="width:100%;justify-content:center;">Book Now</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-label">Bundle</div>
+        <div class="price-val">$350</div>
+        <span class="price-unit">3-session package</span>
+        <ul class="price-features">
+          <li>3 × 1-hour sessions</li>
+          <li>Full workflow audit</li>
+          <li>Custom automation build</li>
+          <li>All session recordings</li>
+          <li>30-day email support</li>
+          <li>Priority scheduling</li>
+        </ul>
+        <a href="mailto:laureennicholson635@gmail.com?subject=3-Session Bundle Booking" class="btn btn-gold" style="width:100%;justify-content:center;">Best Value ✦</a>
+      </div>
+      <div class="price-card">
+        <div class="price-label">Monthly Retainer</div>
+        <div class="price-val">$1,500</div>
+        <span class="price-unit">per month</span>
+        <ul class="price-features">
+          <li>Ongoing consulting</li>
+          <li>Unlimited questions</li>
+          <li>New tool evaluations</li>
+          <li>Priority response</li>
+          <li>Automation &amp; AI systems</li>
+          <li>Monthly strategy call</li>
+        </ul>
+        <a href="mailto:laureennicholson635@gmail.com?subject=Monthly Retainer Inquiry" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="page" id="p-faq">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:36px;">
+      <span class="section-eyebrow">Questions?</span>
+      <h2 class="section-title" style="text-align:center;">Things People <em>Always</em> Ask Me</h2>
+    </div>
+    <div style="max-width:740px;margin:0 auto;" class="reveal">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Do I need to be technical to work with you? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Not at all. My entire approach is designed for non-technical people. If you can send an email, you can learn to use AI tools. I meet you exactly where you are — no jargon, no judgment, ever.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Are sessions remote? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes — 100% remote. All sessions are via video call. I'm based in Brandon, FL but work with clients across the US and beyond. Flexible scheduling to fit your time zone.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Do you work with healthcare organizations? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes — I have 10+ years in Revenue Cycle Management and medical billing, so I understand healthcare workflows deeply. For dedicated healthcare AI and RCM automation services, I have a separate business at <a href="https://automatedrcm.com" target="_blank" style="color:var(--blue);">automatedrcm.com</a>. The Learning AI with Laureen platform focuses on AI education and digital products for all business types.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Can you help me make money with AI? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes. AI training and annotation (DataAnnotation, Outlier AI) pays $40-60/hr. Automation consulting pays $85-175/hr. AI content creation builds entire brands and income streams. I help you find the right path based on your skills and give you a realistic, practical roadmap.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What makes you different from other AI coaches? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Three things: (1) I use every tool I teach in my own businesses — this isn't theory. (2) I have a real 10-year professional background in healthcare that most AI coaches don't have. (3) I teach publicly on TikTok @LearningAIwithLaureen so you can see my style before booking.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What's the first step? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Email me at laureennicholson635@gmail.com or use the Book Me page. The first 15-minute consultation is always free. We'll talk about what you need, where you are, and what makes the most sense for your goals. Zero pressure.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT / BOOK ═══ -->
+<div class="page" id="p-contact">
+  <div class="section">
+    <div class="reveal" style="text-align:center;margin-bottom:40px;">
+      <span class="section-eyebrow">Let's Connect</span>
+      <h2 class="section-title" style="text-align:center;">Book a Session or <em>Say Hello</em></h2>
+      <p style="font-size:14px;color:var(--mid);text-align:center;">First 15-minute consultation is free. I respond to every email within 24 hours.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div>
+        <a href="mailto:laureennicholson635@gmail.com?subject=AI Consultation Inquiry" class="contact-link">
+          <span class="contact-icon">✉</span>
+          <div class="contact-info">
+            <div class="contact-title">Email Me Directly</div>
+            <div class="contact-sub">laureennicholson635@gmail.com · 24hr response</div>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank" class="contact-link">
+          <span class="contact-icon">🎵</span>
+          <div class="contact-info">
+            <div class="contact-title">Follow on TikTok</div>
+            <div class="contact-sub">@LearningAIwithLaureen · daily AI education</div>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://learningaiwithlaureen.com" target="_blank" class="contact-link">
+          <span class="contact-icon">🌐</span>
+          <div class="contact-info">
+            <div class="contact-title">learningaiwithlaureen.com</div>
+            <div class="contact-sub">Portfolio, services &amp; resources</div>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://https://laureenlight.gumroad.com/l/inlssx" class="contact-link">
+          <span class="contact-icon">🛍️</span>
+          <div class="contact-info">
+            <div class="contact-title">Shop Digital Products</div>
+            <div class="contact-sub">100 AI Prompts for Small Business Owners — $27</div>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">Send Me a Message</div>
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-control" id="c-name" placeholder="What should I call you?">
+        </div>
+        <div class="form-group">
+          <label class="form-label">What Do You Need Help With?</label>
+          <input class="form-control" id="c-sub" placeholder="e.g. I want to automate my email workflow">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell Me More</label>
+          <textarea class="form-control" id="c-msg" placeholder="Any details about your business, goals, or questions..."></textarea>
+        </div>
+        <button class="btn btn-gold" style="width:100%;justify-content:center;" onclick="sendMsg()">Send Message ✦</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <div class="footer-logo">Learning AI with Laureen</div>
+  <div class="footer-links">
+    <a href="https://https://laureenlight.gumroad.com/l/inlssx">Shop Products</a>
+    <a href="https://https://laureenlight.gumroad.com/l/cvvri">Free Guide</a>
+    <a href="https://www.tiktok.com/@LearningAIwithLaureen" target="_blank">TikTok</a>
+    <a href="mailto:laureennicholson635@gmail.com">Email</a>
+    <a href="https://automatedrcm.com" target="_blank" style="opacity:0.5;font-size:11px;">Healthcare AI ↗</a>
+  </div>
+  <div class="footer-copy">© 2026 Laureen Nicholson · Brandon, FL · Remote Only</div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// PAGE NAV
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+  document.getElementById('p-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(observeReveal, 100);
+}
+
+// SCROLL REVEAL
+function observeReveal() {
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+}
+
+// MESSAGE
+function sendMsg() {
+  const name = document.getElementById('c-name').value;
+  const sub = document.getElementById('c-sub').value;
+  const msg = document.getElementById('c-msg').value;
+  window.open(`mailto:laureennicholson635@gmail.com?subject=${encodeURIComponent(sub || 'Inquiry from ' + name)}&body=${encodeURIComponent('Name: ' + name + '\n\n' + msg)}`);
+}
+
+// INIT
+window.addEventListener('load', observeReveal);
+window.addEventListener('scroll', observeReveal, { passive: true });
+</script>
+</body>
+</html>
