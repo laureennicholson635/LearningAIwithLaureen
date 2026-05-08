@@ -385,6 +385,11 @@
   </div>
   <div class="mic-hint" id="micHint"></div>
 
+  <!-- ── PERSISTENT CONTACT STRIP ── -->
+  <div style="text-align:center; margin: 14px 0 4px; font-size:.82rem; color:var(--muted);">
+    Want to skip ahead? <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=I+Want+to+Work+With+You" target="_blank" style="color:#a78bfa;font-weight:600;text-decoration:none;">Email the real Laureen directly →</a>
+  </div>
+
   <!-- ── AGENTS ── -->
   <div class="agents-wrap" id="agentsWrap">
     <div class="section-head">💡 Your 2 Automation Ideas</div>
@@ -469,6 +474,8 @@ let analyser     = null;
 let animId       = null;
 let agentsDone   = false;
 let bizContext   = '';
+let audioUnlocked = false;
+let pendingSpeak  = null;
 
 // ── DOM ──────────────────────────────────────────────────────────────────────
 const glowRing   = document.getElementById('glowRing');
@@ -528,11 +535,26 @@ function stopBars() {
   barEls.forEach(b => b.style.height = '5px');
 }
 
-// ── ElevenLabs TTS ───────────────────────────────────────────────────────────
+// ── Audio unlock (browsers block audio until user gesture) ───────────────────
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  // Fire any welcome speech that was held back
+  if (pendingSpeak) { const t = pendingSpeak; pendingSpeak = null; setTimeout(() => fallbackSpeak(t), 150); }
+}
+['click','keydown','touchstart'].forEach(e => document.addEventListener(e, unlockAudio, { once: true }));
+
+// ── TTS: tries ElevenLabs, falls back to browser voice ───────────────────────
 async function speak(text) {
   const short = text.length > 450 ? text.slice(0, 450) + '…' : text;
-  setSpeaking(true);
   typeWords(bubbleTxt, short);
+
+  // If audio hasn't been unlocked yet (page just loaded), hold it
+  if (!audioUnlocked) { pendingSpeak = short; setSpeaking(false); return; }
+
+  setSpeaking(true);
   try {
     const res = await fetch(WORKER + '/speak', {
       method: 'POST',
@@ -545,9 +567,10 @@ async function speak(text) {
     const url  = URL.createObjectURL(blob);
     const aud  = new Audio(url);
 
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 64;
+    if (!analyser) {
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+    }
     const src = audioCtx.createMediaElementSource(aud);
     src.connect(analyser);
     analyser.connect(audioCtx.destination);
@@ -562,12 +585,23 @@ async function speak(text) {
 }
 
 function fallbackSpeak(text) {
-  if (!window.speechSynthesis) { setSpeaking(false); return; }
-  setSpeaking(true); startBars();
-  const u = new SpeechSynthesisUtterance(text);
-  u.rate = 0.95; u.pitch = 1.08;
-  u.onend = () => { setSpeaking(false); stopBars(); };
-  window.speechSynthesis.speak(u);
+  if (!window.speechSynthesis) { setSpeaking(false); stopBars(); return; }
+  window.speechSynthesis.cancel();
+  const doSpeak = () => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.92; u.pitch = 1.05; u.volume = 1;
+    const voices = window.speechSynthesis.getVoices();
+    const pick = voices.find(v => v.lang.startsWith('en') &&
+      /samantha|karen|victoria|zira|female|google us english/i.test(v.name))
+      || voices.find(v => v.lang.startsWith('en'));
+    if (pick) u.voice = pick;
+    setSpeaking(true); startBars();
+    u.onend  = () => { setSpeaking(false); stopBars(); };
+    u.onerror = () => { setSpeaking(false); stopBars(); };
+    window.speechSynthesis.speak(u);
+  };
+  if (window.speechSynthesis.getVoices().length > 0) doSpeak();
+  else window.speechSynthesis.addEventListener('voiceschanged', doSpeak, { once: true });
 }
 
 // ── Chat messages ────────────────────────────────────────────────────────────
