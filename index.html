@@ -454,8 +454,9 @@
     <div class="modal-emoji">📞</div>
     <h2>Dialing Up the Real Laureen!</h2>
     <p>Leave your info and Laureen will personally reach out within 24 hours. Trust me — she is going to love your project.</p>
-    <input type="text"  id="mName"     placeholder="Your name">
+    <input type="text"  id="mName"     placeholder="Your name (required)">
     <input type="email" id="mEmail"    placeholder="Your email (required)">
+    <input type="tel"   id="mPhone"    placeholder="Your phone number (optional)">
     <input type="text"  id="mBusiness" placeholder="What do you need built? (optional)">
     <button class="modal-go"  id="modalGo">🔥 Connect Me With Laureen!</button>
     <button class="modal-skip" id="modalSkip">Maybe later</button>
@@ -752,7 +753,9 @@ modalSkip.addEventListener('click', () => modalBg.classList.remove('show'));
 modalGo.addEventListener('click', async () => {
   const name  = document.getElementById('mName').value.trim();
   const email = document.getElementById('mEmail').value.trim();
+  const phone = document.getElementById('mPhone').value.trim();
   const biz   = document.getElementById('mBusiness').value.trim() || bizContext;
+  if (!name)  { alert('Name is required!'); return; }
   if (!email) { alert('Email is required!'); return; }
 
   modalGo.textContent = '📡 Connecting…';
@@ -762,7 +765,7 @@ modalGo.addEventListener('click', async () => {
     await fetch(WORKER + '/lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, business: biz, source: 'deploy_request' })
+      body: JSON.stringify({ name, email, phone, business: biz, source: 'deploy_request' })
     });
   } catch {}
 
