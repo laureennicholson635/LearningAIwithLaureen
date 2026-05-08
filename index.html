@@ -457,7 +457,8 @@ const VOICE_ID = 'JHj1VD8u3GP01Korhp8r';
 let agentsGenerated = 0;
 const MAX_FREE = 2;
 let isMuted = false, isSpeaking = false;
-let recognition = null, audioPlayer = null;
+let recognition = null;
+let audioCtx = null, gainNode = null, currentSource = null;
 let conversationHistory = [];
 
 const $msg = document.getElementById('messages');
@@ -483,13 +484,30 @@ function setSpeaking(on) {
   $chatBars.classList.toggle('on', on);
 }
 
-// ── SPEAK via ElevenLabs worker proxy ──────────────────────────────
-// Uses ONE persistent Audio element (unlocked on first tap) so iOS keeps working
-function initAudio() {
-  if (audioPlayer) return;
-  audioPlayer = new Audio();
-  audioPlayer.onended = () => setSpeaking(false);
-  audioPlayer.onerror = () => setSpeaking(false);
+// ── AUDIO ENGINE — Web AudioContext ────────────────────────────────
+// AudioContext stays unlocked for the ENTIRE session once resumed during
+// any user gesture (tap overlay, tap mic). Audio element loses its unlock
+// after ~1 second — that's why mic → voice was broken on iOS.
+
+function initAudioContext() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioCtx.createGain();
+  gainNode.gain.value = isMuted ? 0 : 1;
+  gainNode.connect(audioCtx.destination);
+}
+
+function unlockAudio() {
+  // MUST be called synchronously inside a user gesture (tap/click handler).
+  // Creates the AudioContext and plays 1 frame of silence —
+  // that single real-audio-play during the gesture keeps iOS unlocked forever.
+  initAudioContext();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  const silentBuf = audioCtx.createBuffer(1, 1, 22050);
+  const silentSrc = audioCtx.createBufferSource();
+  silentSrc.buffer = silentBuf;
+  silentSrc.connect(gainNode);
+  silentSrc.start(0);
 }
 
 async function speak(text) {
@@ -503,21 +521,31 @@ async function speak(text) {
       body: JSON.stringify({ text: clean, voice_id: VOICE_ID })
     });
     if (!res.ok) { setSpeaking(false); return; }
-    const blob = await res.blob();
-    if (!blob || blob.size === 0) { setSpeaking(false); return; }
-    initAudio();
-    audioPlayer.pause();
-    if (audioPlayer.src && audioPlayer.src.startsWith('blob:')) URL.revokeObjectURL(audioPlayer.src);
-    audioPlayer.src = URL.createObjectURL(blob);
-    audioPlayer.load(); // Required on iOS — tells browser a new source is ready
-    await audioPlayer.play();
+    const arrayBuffer = await res.arrayBuffer();
+    if (!arrayBuffer || arrayBuffer.byteLength === 0) { setSpeaking(false); return; }
+    initAudioContext();
+    if (audioCtx.state === 'suspended') await audioCtx.resume();
+    // Stop any currently playing audio
+    if (currentSource) { try { currentSource.stop(); currentSource.disconnect(); } catch(e) {} currentSource = null; }
+    // Decode and play via AudioContext — works on iOS without needing a fresh gesture
+    const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer.slice(0));
+    currentSource = audioCtx.createBufferSource();
+    currentSource.buffer = audioBuffer;
+    currentSource.connect(gainNode);
+    currentSource.onended = () => { setSpeaking(false); currentSource = null; };
+    currentSource.start(0);
   } catch(e) { setSpeaking(false); }
 }
 
 function toggleMute() {
   isMuted = !isMuted;
   $muteBtn.textContent = isMuted ? '🔇' : '🔊';
-  if (isMuted && audioPlayer) { audioPlayer.pause(); setSpeaking(false); }
+  if (gainNode) gainNode.gain.value = isMuted ? 0 : 1;
+  if (isMuted && currentSource) {
+    try { currentSource.stop(); } catch(e) {}
+    currentSource = null;
+    setSpeaking(false);
+  }
 }
 
 // ── MESSAGES ────────────────────────────────────────────────────────
@@ -663,10 +691,8 @@ function toggleMic() {
   $micBtn.classList.contains('recording') ? stopMic() : startMic();
 }
 function startMic() {
-  // Re-prime audio during this user gesture so iOS allows async playback after recognition
-  initAudio();
-  audioPlayer.src = SILENT_WAV;
-  audioPlayer.play().then(() => { audioPlayer.pause(); audioPlayer.src = ''; }).catch(() => {});
+  // Unlock AudioContext during this user gesture — keeps iOS audio alive for the full async chain
+  unlockAudio();
   setSpeaking(false);
   recognition.start();
   $micBtn.classList.add('recording');
@@ -689,18 +715,10 @@ function stopMic() {
 }
 
 // ── GREETING ─────────────────────────────────────────────────────────
-// Tiny silent WAV — playing this during the user gesture unlocks iOS audio
-const SILENT_WAV = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
-
 let greetingSpoken = false;
 function unlockAndGreet() {
-  // Play a real (silent) audio file during the user gesture — this is what iOS requires
-  initAudio();
-  audioPlayer.src = SILENT_WAV;
-  audioPlayer.play().then(() => {
-    audioPlayer.pause();
-    audioPlayer.src = '';
-  }).catch(() => {});
+  // Unlock AudioContext during the user gesture — one-time, stays unlocked forever
+  unlockAudio();
   const overlay = document.getElementById('audioOverlay');
   if (overlay) { overlay.style.opacity = '0'; overlay.style.transition = 'opacity 0.4s'; setTimeout(() => overlay.style.display = 'none', 400); }
   const hint = document.getElementById('clickHint');
