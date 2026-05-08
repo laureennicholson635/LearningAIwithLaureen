@@ -385,20 +385,20 @@
   </div>
   <div class="mic-hint" id="micHint"></div>
 
-  <!-- ── PERSISTENT CONTACT STRIP ── -->
-  <div style="text-align:center; margin: 14px 0 4px; font-size:.82rem; color:var(--muted);">
-    Want to skip ahead? <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=I+Want+to+Work+With+You" target="_blank" style="color:#a78bfa;font-weight:600;text-decoration:none;">Email the real Laureen directly →</a>
-  </div>
-
   <!-- ── AGENTS ── -->
   <div class="agents-wrap" id="agentsWrap">
     <div class="section-head">💡 Your 2 Automation Ideas</div>
     <div class="agents-grid" id="agentsGrid"></div>
-    <button class="dial-btn" id="dialBtn">📞 Deploy These For Real — Let Me Dial Up Laureen!</button>
   </div>
 
-  <!-- ── PRICING ── -->
-  <div class="pricing-wrap" id="pricingWrap">
+  <!-- ── TALK TO REAL LAUREEN (always visible) ── -->
+  <div style="text-align:center; margin: 28px 0 8px;">
+    <button class="dial-btn" id="dialBtn">📞 Want to Work With the Real Laureen? Click Here!</button>
+    <div style="font-size:.78rem; color:#a78bfa; margin-top:8px; opacity:.8;">She personally responds within 24 hours</div>
+  </div>
+
+  <!-- ── PRICING (always visible) ── -->
+  <div class="pricing-wrap" id="pricingWrap" style="display:block !important">
     <div class="pricing-title">Ready to Go Further?</div>
     <div class="pricing-sub">AI Laureen gives you the ideas — the real Laureen makes them happen.</div>
     <div class="pricing-grid">
@@ -541,8 +541,8 @@ function unlockAudio() {
   audioUnlocked = true;
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   if (audioCtx.state === 'suspended') audioCtx.resume();
-  // Fire any welcome speech that was held back
-  if (pendingSpeak) { const t = pendingSpeak; pendingSpeak = null; setTimeout(() => fallbackSpeak(t), 150); }
+  // Fire any welcome speech that was held back — use full speak() so ElevenLabs voice plays
+  if (pendingSpeak) { const t = pendingSpeak; pendingSpeak = null; setTimeout(() => speak(t), 150); }
 }
 ['click','keydown','touchstart'].forEach(e => document.addEventListener(e, unlockAudio, { once: true }));
 
@@ -735,7 +735,6 @@ async function buildAgents() {
 
     setTimeout(() => {
       speak("Okay! So those are two ideas for how automation could work in your specific situation. Just to be real with you — these are concepts, not finished workflows. Actually building them takes real setup and testing, which is exactly what the real Laureen does. Want to talk to her about it?");
-      pricingWrap.classList.add('show');
     }, 1200);
 
   } catch {
