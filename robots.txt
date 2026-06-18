@@ -1,0 +1,70 @@
+# robots.txt for learningaiwithlaureen.com
+# Goal: be fully crawlable + explicitly welcome AI search/answer engines (GEO/AEO).
+
+# ---- Default: allow everyone ----
+User-agent: *
+Allow: /
+
+# ---- AI search & answer engines (explicitly allowed) ----
+# OpenAI — ChatGPT search + live retrieval
+User-agent: OAI-SearchBot
+Allow: /
+
+# OpenAI — GPTBot (training + browsing)
+User-agent: GPTBot
+Allow: /
+
+# OpenAI — ChatGPT-User (on-demand fetch when a user asks)
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google — Gemini / AI Overviews extended crawler
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft / Bing — Copilot
+User-agent: bingbot
+Allow: /
+
+# Common Crawl (feeds many AI datasets)
+User-agent: CCBot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# DuckDuckGo AI
+User-agent: DuckAssistBot
+Allow: /
+
+# ---- Sitemap ----
+Sitemap: https://learningaiwithlaureen.com/sitemap.xml
