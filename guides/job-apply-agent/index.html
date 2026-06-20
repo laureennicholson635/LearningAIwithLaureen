@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Own AI Job-Apply Agent — Free Guide · Learning AI with Laureen</title>
+<meta name="description" content="Find jobs, skip the junk, and tailor your resume for every one — no code required.">
+<meta property="og:title" content="Build Your Own AI Job-Apply Agent — Free Guide">
+<meta property="og:description" content="Find jobs, skip the junk, and tailor your resume for every one — no code required.">
+<meta property="og:type" content="article">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--purple:#9333ea;--pink:#ec4899;--dark:#08010f;--card:#160a26;--border:#2f1c49;--muted:#b399d6}
+  body{background:radial-gradient(1200px 600px at 50% -10%,#1a0b2e 0%,var(--dark) 60%);color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh;display:flex;justify-content:center;padding:34px 18px 56px}
+  .wrap{width:100%;max-width:600px}
+  a.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:13px;margin-bottom:22px}
+  a.back:hover{color:#fff}
+  .ava{width:84px;height:84px;border-radius:50%;margin:0 auto;display:block;object-fit:cover;border:3px solid transparent;background:linear-gradient(var(--dark),var(--dark)) padding-box,linear-gradient(135deg,var(--purple),var(--pink)) border-box}
+  .hero-ic{width:64px;height:64px;margin:18px auto 0;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;background:rgba(147,51,234,.16)}
+  .kicker{text-align:center;color:var(--pink);font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin:16px 0 6px}
+  h1{font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;line-height:1.25;text-align:center;margin:0 auto 8px;max-width:520px}
+  .sub{text-align:center;color:var(--muted);font-size:15px;line-height:1.55;margin:0 auto 26px;max-width:480px}
+
+  /* ── Email gate ───────────────────────────────────────────── */
+  .gate{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 22px;margin-bottom:14px}
+  .gate h2{font-family:'Poppins',sans-serif;font-weight:600;font-size:18px;text-align:center;margin-bottom:6px}
+  .gate p.lead{text-align:center;color:var(--muted);font-size:13.5px;line-height:1.5;margin-bottom:18px}
+  .gate input[type=email]{width:100%;background:#0d0518;border:1px solid var(--border);border-radius:12px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;padding:14px 15px;outline:none;transition:border-color .12s ease}
+  .gate input[type=email]:focus{border-color:var(--purple)}
+  .gate input[type=email]::placeholder{color:#6b568a}
+  .gate .err{color:#ff8da6;font-size:12.5px;margin:8px 2px 0;min-height:16px}
+  .cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:none;cursor:pointer;margin-top:12px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;border-radius:12px;padding:15px 16px;box-shadow:0 12px 32px rgba(147,51,234,.45);transition:transform .12s ease,box-shadow .12s ease}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(236,72,153,.55)}
+  .cta:active{transform:translateY(0)}
+  .gate .fine{text-align:center;color:#6b568a;font-size:11.5px;margin-top:14px;line-height:1.5}
+
+  /* ── Unlocked content ─────────────────────────────────────── */
+  .content{animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .content .intro{color:#e7ddf5;font-size:15.5px;line-height:1.7;margin-bottom:18px}
+  .content .intro p{margin-bottom:12px}
+  .codewrap{position:relative;background:#0d1117;border:1px solid var(--border);border-left:3px solid var(--purple);border-radius:12px;margin:0 0 14px}
+  .codebar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px 8px;border-bottom:1px solid #20283a}
+  .codebar .label{color:#7d8aa3;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+  .copybtn{cursor:pointer;border:1px solid #2f3b52;background:#161d2b;color:#c9f7f9;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;border-radius:8px;padding:6px 13px;transition:background .12s ease,border-color .12s ease}
+  .copybtn:hover{background:#1d2740;border-color:var(--purple)}
+  .copybtn.done{background:#123a2a;border-color:#19c37d;color:#7ef0bd}
+  pre.prompt{color:#c9f7f9;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.6;padding:16px;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:0}
+  .note{color:var(--muted);font-size:13px;line-height:1.6;background:rgba(147,51,234,.08);border:1px solid var(--border);border-radius:12px;padding:13px 15px}
+  .note strong{color:#e7ddf5}
+  .after{margin-top:22px;text-align:center}
+  .after a{display:inline-block;color:#fff;text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 18px;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;transition:border-color .12s ease}
+  .after a:hover{border-color:var(--purple)}
+  .ft{text-align:center;color:#6b568a;font-size:12px;margin-top:26px}
+  .ft a{color:var(--muted);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/links/">&#8249; Back to all links</a>
+  <img class="ava" src="/me.jpg" alt="Laureen Nicholson">
+  <div class="hero-ic">🎯</div>
+  <p class="kicker">Free Guide</p>
+  <h1>Build Your Own AI Job-Apply Agent</h1>
+  <p class="sub">Find jobs, skip the junk, and tailor your resume for every one — no code required.</p>
+
+  <!-- Email gate -->
+  <form class="gate" id="gate" novalidate>
+    <h2>Enter your email to unlock the guide</h2>
+    <p class="lead">Get instant access below &mdash; plus my weekly AI newsletter.</p>
+    <input type="email" id="email" placeholder="you@email.com" autocomplete="email" required>
+    <div class="err" id="err"></div>
+    <button type="submit" class="cta">Unlock the guide &#8594;</button>
+    <p class="fine">No spam. Unsubscribe anytime. Your guide appears right here after you submit.</p>
+  </form>
+
+  <!-- Unlocked content (hidden until email submitted) -->
+  <div class="content" id="content" hidden>
+    <div class="intro"><p>Want the AI agent from my video that finds jobs, filters out the junk, and tailors your resume for each one? You don't need to code. Copy the prompt below, paste it into ChatGPT or Claude, and your AI will build it WITH you, step by step.</p></div>
+
+    <div class="codewrap">
+      <div class="codebar">
+        <span class="label">Copy this prompt</span>
+        <button type="button" class="copybtn" id="copybtn">Copy</button>
+      </div>
+      <pre class="prompt" id="prompt">I want you to help me build a simple &quot;job application assistant&quot; — I am not a coder, so explain everything in plain English and walk me through it one step at a time. Wait for me to finish each step before giving me the next.
+
+Here is what I want it to do:
+1. Let me save my job search rules (remote only, minimum pay, keywords I care about, location).
+2. Take a list of job postings I paste in, and tell me which ones match my rules and which to skip — and why.
+3. For each job that matches, rewrite my resume so it uses the same keywords as that job posting (to help me pass the ATS screening). Only rephrase things that are TRUE about me — never invent experience. Always put my website at the top.
+4. Put the results in a simple table I can copy: job title, company, pay, and a &quot;resume ready&quot; note.
+
+Start by asking me for my job search rules and my current resume. Then teach me how to use it. Tell me clearly which parts I have to do myself (like pasting in job postings and actually clicking apply), because I want to stay in control and not break any website&#x27;s rules.</pre>
+    </div>
+
+    <div class="note"><strong>What you still do yourself:</strong> paste in the job postings, review the AI's picks, and click apply. The AI does the slow part (reading, filtering, and tailoring your resume); you stay in control of the final send.</div>
+
+    <div class="after">
+      <a href="https://calendly.com/laureennicholson635">Want help building it? Book a free 15-min call &#8594;</a>
+    </div>
+  </div>
+
+  <p class="ft"><a href="https://learningaiwithlaureen.com">learningaiwithlaureen.com</a></p>
+</div>
+
+<script>
+(function(){
+  var SLUG = "job-apply-agent";
+  var SUBSCRIBE_URL = "https://automatedrcm-guide-delivery.laureennicholson635.workers.dev/subscribe";
+  var LS_KEY = "guide_unlocked_" + SLUG;
+
+  var gate = document.getElementById("gate");
+  var content = document.getElementById("content");
+  var emailInput = document.getElementById("email");
+  var err = document.getElementById("err");
+  var copybtn = document.getElementById("copybtn");
+  var promptEl = document.getElementById("prompt");
+
+  function unlock(){ gate.style.display = "none"; content.hidden = false; }
+
+  // Returning visitor who already unlocked? Skip the gate.
+  try { if (localStorage.getItem(LS_KEY)) unlock(); } catch(e){}
+
+  gate.addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = (emailInput.value || "").trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      err.textContent = "Please enter a valid email address.";
+      emailInput.focus();
+      return;
+    }
+    err.textContent = "";
+    try { localStorage.setItem(LS_KEY, "1"); } catch(e){}
+    unlock();  // reveal instantly — never trap a real visitor behind a backend hiccup
+    // Add them to Beehiiv in the background (same list as the bio-link guide).
+    try {
+      fetch(SUBSCRIBE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, guide: SLUG })
+      }).catch(function(){});
+    } catch(e){}
+  });
+
+  copybtn.addEventListener("click", function(){
+    var text = promptEl.textContent;
+    function done(){ copybtn.textContent = "Copied!"; copybtn.classList.add("done");
+      setTimeout(function(){ copybtn.textContent = "Copy"; copybtn.classList.remove("done"); }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); done(); } catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+})();
+</script>
+<script>try{fetch("https://learningai-lens.laureennicholson635.workers.dev/px?u="+encodeURIComponent(location.href)+"&r="+encodeURIComponent(document.referrer)+"&s="+screen.width+"x"+screen.height,{mode:"no-cors"})}catch(e){}</script>
+</body>
+</html>
