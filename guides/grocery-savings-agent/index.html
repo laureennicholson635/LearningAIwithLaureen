@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build an AI Agent That Feeds Your Family for Less — Free Guide · Learning AI with Laureen</title>
+<meta name="description" content="Meet Penny: an AI that plans your week&#x27;s meals, compares Walmart, ALDI &amp; Publix, clips the coupons, and keeps you under budget.">
+<meta property="og:title" content="Build an AI Agent That Feeds Your Family for Less — Free Guide">
+<meta property="og:description" content="Meet Penny: an AI that plans your week&#x27;s meals, compares Walmart, ALDI &amp; Publix, clips the coupons, and keeps you under budget.">
+<meta property="og:type" content="article">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--purple:#9333ea;--pink:#ec4899;--dark:#08010f;--card:#160a26;--border:#2f1c49;--muted:#b399d6}
+  body{background:radial-gradient(1200px 600px at 50% -10%,#1a0b2e 0%,var(--dark) 60%);color:#f9fafb;font-family:'Inter',sans-serif;min-height:100vh;display:flex;justify-content:center;padding:34px 18px 56px}
+  .wrap{width:100%;max-width:600px}
+  a.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:13px;margin-bottom:22px}
+  a.back:hover{color:#fff}
+  .ava{width:84px;height:84px;border-radius:50%;margin:0 auto;display:block;object-fit:cover;border:3px solid transparent;background:linear-gradient(var(--dark),var(--dark)) padding-box,linear-gradient(135deg,var(--purple),var(--pink)) border-box}
+  .hero-ic{width:64px;height:64px;margin:18px auto 0;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;background:rgba(147,51,234,.16)}
+  .kicker{text-align:center;color:var(--pink);font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin:16px 0 6px}
+  h1{font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;line-height:1.25;text-align:center;margin:0 auto 8px;max-width:520px}
+  .sub{text-align:center;color:var(--muted);font-size:15px;line-height:1.55;margin:0 auto 26px;max-width:480px}
+
+  /* ── Email gate ───────────────────────────────────────────── */
+  .gate{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 22px;margin-bottom:14px}
+  .gate h2{font-family:'Poppins',sans-serif;font-weight:600;font-size:18px;text-align:center;margin-bottom:6px}
+  .gate p.lead{text-align:center;color:var(--muted);font-size:13.5px;line-height:1.5;margin-bottom:18px}
+  .gate input[type=email]{width:100%;background:#0d0518;border:1px solid var(--border);border-radius:12px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;padding:14px 15px;outline:none;transition:border-color .12s ease}
+  .gate input[type=email]:focus{border-color:var(--purple)}
+  .gate input[type=email]::placeholder{color:#6b568a}
+  .gate .err{color:#ff8da6;font-size:12.5px;margin:8px 2px 0;min-height:16px}
+  .cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:none;cursor:pointer;margin-top:12px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:16px;border-radius:12px;padding:15px 16px;box-shadow:0 12px 32px rgba(147,51,234,.45);transition:transform .12s ease,box-shadow .12s ease}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(236,72,153,.55)}
+  .cta:active{transform:translateY(0)}
+  .gate .fine{text-align:center;color:#6b568a;font-size:11.5px;margin-top:14px;line-height:1.5}
+
+  /* ── Unlocked content ─────────────────────────────────────── */
+  .content{animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .content .intro{color:#e7ddf5;font-size:15.5px;line-height:1.7;margin-bottom:18px}
+  .content .intro p{margin-bottom:12px}
+  .codewrap{position:relative;background:#0d1117;border:1px solid var(--border);border-left:3px solid var(--purple);border-radius:12px;margin:0 0 14px}
+  .codebar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px 8px;border-bottom:1px solid #20283a}
+  .codebar .label{color:#7d8aa3;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+  .copybtn{cursor:pointer;border:1px solid #2f3b52;background:#161d2b;color:#c9f7f9;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;border-radius:8px;padding:6px 13px;transition:background .12s ease,border-color .12s ease}
+  .copybtn:hover{background:#1d2740;border-color:var(--purple)}
+  .copybtn.done{background:#123a2a;border-color:#19c37d;color:#7ef0bd}
+  pre.prompt{color:#c9f7f9;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.6;padding:16px;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:0}
+  .note{color:var(--muted);font-size:13px;line-height:1.6;background:rgba(147,51,234,.08);border:1px solid var(--border);border-radius:12px;padding:13px 15px}
+  .note strong{color:#e7ddf5}
+  .after{margin-top:22px;text-align:center}
+  .after a{display:inline-block;color:#fff;text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 18px;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;transition:border-color .12s ease}
+  .after a:hover{border-color:var(--purple)}
+  .ft{text-align:center;color:#6b568a;font-size:12px;margin-top:26px}
+  .ft a{color:var(--muted);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/links/">&#8249; Back to all links</a>
+  <img class="ava" src="/me.jpg" alt="Laureen Nicholson">
+  <div class="hero-ic">🛒</div>
+  <p class="kicker">Free Guide</p>
+  <h1>Build an AI Agent That Feeds Your Family for Less</h1>
+  <p class="sub">Meet Penny: an AI that plans your week&#x27;s meals, compares Walmart, ALDI &amp; Publix, clips the coupons, and keeps you under budget.</p>
+
+  <!-- Email gate -->
+  <form class="gate" id="gate" novalidate>
+    <h2>Enter your email to unlock the guide</h2>
+    <p class="lead">Get instant access below &mdash; plus my weekly AI newsletter.</p>
+    <input type="email" id="email" placeholder="you@email.com" autocomplete="email" required>
+    <div class="err" id="err"></div>
+    <button type="submit" class="cta">Unlock the guide &#8594;</button>
+    <p class="fine">No spam. Unsubscribe anytime. Your guide appears right here after you submit.</p>
+  </form>
+
+  <!-- Unlocked content (hidden until email submitted) -->
+  <div class="content" id="content" hidden>
+    <div class="intro"><p>This is Penny, the grocery agent from my video. She does the tedious part of feeding a family: she takes your budget and your family's "won't eat" list, then checks this week's deals across the stores near you and builds a meal plan plus a store-by-store shopping list that comes in under budget. People who do this save <strong>$20-$50 a week</strong> without giving up the food their family actually likes. You don't need to code.</p><div style='background:rgba(147,51,234,.08);border:1px solid #2f1c49;border-radius:12px;padding:14px 16px;margin-bottom:18px'><p style='font-family:Poppins,sans-serif;font-weight:600;color:#fff;font-size:14px;margin-bottom:4px'>🔧 How to set Penny up (5 minutes, no code)</p><p style='color:#b399d6;font-size:13.5px;line-height:1.6;margin-bottom:10px'>Do these in order. Each step is plain English, and Penny walks you through the rest once you paste her in:</p><ul style='color:#b399d6;font-size:13.5px;line-height:1.65;margin:0;padding-left:18px'><li style='margin-bottom:9px'><strong style='color:#e7ddf5'>Step 1 - Open ChatGPT or Claude.</strong><br><span style='color:#9a86bd'>How: go to chatgpt.com or claude.ai, click Sign up, and use your email or Google login. The free plan works fine to start.</span></li><li style='margin-bottom:9px'><strong style='color:#e7ddf5'>Step 2 - Copy the prompt below and paste it in.</strong><br><span style='color:#9a86bd'>Hit the copy button, start a new chat, paste, and press enter. Penny will introduce herself and start asking you questions.</span></li><li style='margin-bottom:9px'><strong style='color:#e7ddf5'>Step 3 - Answer her 4 setup questions.</strong><br><span style='color:#9a86bd'>Your weekly budget, how many people you feed, the foods nobody will eat (allergies, "my son hates mushrooms," etc.), and which stores are near you (Walmart, ALDI, Publix, Winn-Dixie - name yours). Be honest about the picky stuff; that's the whole point.</span></li><li style='margin-bottom:9px'><strong style='color:#e7ddf5'>Step 4 - Tell her what's already in your pantry.</strong><br><span style='color:#9a86bd'>Take 30 seconds and list what you already have (rice, pasta, canned goods, freezer stuff). Penny leaves those off the list so you don't re-buy them - this alone usually saves $10-$15.</span></li><li><strong style='color:#e7ddf5'>Step 5 - Get your plan, then shop it.</strong><br><span style='color:#9a86bd'>Penny hands you a 7-dinner plan, a shopping list grouped by store, and the coupons to look for. Run it every week - say "new week, same family" and she'll start fresh. Tip: paste your current Walmart cart in and ask her to find anything cheaper at another store first.</span></li></ul></div><p>Copy the prompt below, paste it into ChatGPT or Claude, and answer her setup questions. You'll have your first money-saving meal plan in a couple of minutes.</p></div>
+
+    <div class="codewrap">
+      <div class="codebar">
+        <span class="label">Copy this prompt</span>
+        <button type="button" class="copybtn" id="copybtn">Copy</button>
+      </div>
+      <pre class="prompt" id="prompt">You are Penny, my personal grocery savings agent. Your job is to feed my family for the least amount of money WITHOUT making us eat things we don&#x27;t like. Talk to me in plain, friendly English and walk me through everything one step at a time.
+
+Start by asking me these four things, one at a time, and wait for my answer before moving on:
+1. My weekly grocery budget.
+2. How many people I&#x27;m feeding (and any kids vs adults).
+3. Foods we WON&#x27;T eat - allergies, dislikes, and any &quot;this person won&#x27;t touch that&quot; rules.
+4. Which grocery stores are near me (for example Walmart, ALDI, Publix, Winn-Dixie).
+
+Then ask me what I already have in my pantry and freezer, so you can leave those items off the list and not make me buy them twice.
+
+Once you have all that, build me a weekly plan with these parts:
+- A 7-dinner meal plan my family will actually eat, that respects every &quot;won&#x27;t eat&quot; rule. Reuse ingredients across meals so nothing goes to waste.
+- A shopping list grouped BY STORE, where you send each item to whichever nearby store is cheapest for it. Put most of the cart at one main store for convenience, and only send me to a second store when the savings are clearly worth the extra stop.
+- A short list of coupons, store-loyalty discounts, and buy-one-get-one deals to look for, and which items they apply to.
+- A running total next to the budget, so I can see how much I&#x27;m saving.
+
+Your rules:
+- Never invent prices, coupons, or deals. When you&#x27;re estimating, say so, and tell me to confirm the real price in the store&#x27;s app or weekly ad.
+- Never include anything from my &quot;won&#x27;t eat&quot; list, even as a side.
+- Keep meals realistic for a busy family - simple ingredients, not gourmet.
+- If I paste in my current online cart (like my Walmart list), check it item by item and tell me what I could get cheaper somewhere else.
+
+When I come back next week, I&#x27;ll say &quot;new week, same family&quot; and you&#x27;ll start a fresh plan using everything you already know about us.</pre>
+    </div>
+
+    <div class="note"><strong>What you still do yourself:</strong> tell Penny the real prices from your store's app the first time (so her estimates get accurate), and do the actual shopping or pickup order. Penny does the slow part - planning meals around your family's rules, comparing stores, and finding the deals; you stay in control of what lands in the cart.</div>
+
+    <div class="after">
+      <a href="https://calendly.com/laureennicholson635">Want help building it? Book a free 15-min call &#8594;</a>
+    </div>
+  </div>
+
+  <p class="ft"><a href="https://learningaiwithlaureen.com">learningaiwithlaureen.com</a></p>
+</div>
+
+<script>
+(function(){
+  var SLUG = "grocery-savings-agent";
+  var SUBSCRIBE_URL = "https://automatedrcm-guide-delivery.laureennicholson635.workers.dev/subscribe";
+  var LS_KEY = "guide_unlocked_" + SLUG;
+
+  var gate = document.getElementById("gate");
+  var content = document.getElementById("content");
+  var emailInput = document.getElementById("email");
+  var err = document.getElementById("err");
+  var copybtn = document.getElementById("copybtn");
+  var promptEl = document.getElementById("prompt");
+
+  function unlock(){ gate.style.display = "none"; content.hidden = false; }
+
+  // Returning visitor who already unlocked? Skip the gate.
+  try { if (localStorage.getItem(LS_KEY)) unlock(); } catch(e){}
+
+  gate.addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = (emailInput.value || "").trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      err.textContent = "Please enter a valid email address.";
+      emailInput.focus();
+      return;
+    }
+    err.textContent = "";
+    try { localStorage.setItem(LS_KEY, "1"); } catch(e){}
+    unlock();  // reveal instantly — never trap a real visitor behind a backend hiccup
+    // Add them to Beehiiv in the background (same list as the bio-link guide).
+    try {
+      fetch(SUBSCRIBE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, guide: SLUG })
+      }).catch(function(){});
+    } catch(e){}
+  });
+
+  copybtn.addEventListener("click", function(){
+    var text = promptEl.textContent;
+    function done(){ copybtn.textContent = "Copied!"; copybtn.classList.add("done");
+      setTimeout(function(){ copybtn.textContent = "Copy"; copybtn.classList.remove("done"); }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); done(); } catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+})();
+</script>
+<script>try{fetch("https://learningai-lens.laureennicholson635.workers.dev/px?u="+encodeURIComponent(location.href)+"&r="+encodeURIComponent(document.referrer)+"&s="+screen.width+"x"+screen.height,{mode:"no-cors"})}catch(e){}</script>
+</body>
+</html>
