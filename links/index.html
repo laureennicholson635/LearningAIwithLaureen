@@ -25,6 +25,14 @@
   .btn .t1{display:block;color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:15.5px}
   .btn .t2{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
   .btn .ar{color:#6b568a;font-size:20px;flex:none}
+  .btn.featured{background:linear-gradient(135deg,var(--purple),var(--pink));border:none;box-shadow:0 12px 32px rgba(147,51,234,.5);position:relative;margin:0 0 22px;animation:glow 2.6s ease-in-out infinite}
+  .btn.featured:hover{transform:translateY(-2px) scale(1.012);border:none}
+  .btn.featured .ic{background:rgba(255,255,255,.22)}
+  .btn.featured .t1{font-size:16px;color:#fff}
+  .btn.featured .t2{color:#f4e9ff}
+  .btn.featured .ar{color:#fff}
+  .badge-free{position:absolute;top:-10px;right:14px;background:#fff;color:var(--purple);font-family:'Poppins',sans-serif;font-weight:700;font-size:10px;letter-spacing:.07em;padding:3px 10px;border-radius:999px;box-shadow:0 3px 9px rgba(0,0,0,.3)}
+  @keyframes glow{0%,100%{box-shadow:0 12px 32px rgba(147,51,234,.5)}50%{box-shadow:0 12px 40px rgba(236,72,153,.6)}}
   .ft{text-align:center;color:#6b568a;font-size:12px;margin-top:22px}
   .ft a{color:var(--muted);text-decoration:none}
 </style>
@@ -35,9 +43,52 @@
   <h1 class="name">Laureen Nicholson</h1>
   <p class="tag">AI automation that works while you sleep</p>
 
-  <a class="btn" href="https://office.getautomatedrcm.com">
+  <a class="btn featured" href="https://office.getautomatedrcm.com">
+    <span class="badge-free">LIVE</span>
     <span class="ic">&#128172;</span>
-    <span class="tx"><span class="t1">Walk into my AI office</span><span class="t2">5 AI employees, one group chat, zero chill. Start a meeting</span></span>
+    <span class="tx"><span class="t1">&#128188; Walk into my AI office group chat</span><span class="t2">5 AI employees, zero chill &middot; start a meeting, they will fight</span></span>
+    <span class="ar">&#8250;</span>
+  </a>
+
+  <a class="btn featured" href="https://learningaiwithlaureen.com/ai/">
+    <span class="badge-free">SHE'S BACK</span>
+    <span class="ic">&#128156;</span>
+    <span class="tx"><span class="t1">&#129302; Chat with AI Laureen &mdash; my AI twin</span><span class="t2">Talks like me, works 24/7, free &middot; be nice, she was alone since May</span></span>
+    <span class="ar">&#8250;</span>
+  </a>
+
+  <a class="btn featured" href="https://hireaiwithlaureen.com">
+    <span class="badge-free">NEW</span>
+    <span class="ic">&#129302;</span>
+    <span class="tx"><span class="t1">&#128640; Hire an AI agent, it does the job in minutes</span><span class="t2">Resume rewrite &middot; interview prep &middot; 30-day content calendar &middot; from $12</span></span>
+    <span class="ar">&#8250;</span>
+  </a>
+
+  <a class="btn featured" href="https://laureens-newsletter-a137e0.beehiiv.com">
+    <span class="badge-free">FREE</span>
+    <span class="ic">&#128218;</span>
+    <span class="tx"><span class="t1">&#127873; Free Guide: The 2 AI Agents Changing Medical Billing</span><span class="t2">Get the guide instantly + my weekly newsletter</span></span>
+    <span class="ar">&#8250;</span>
+  </a>
+
+  <a class="btn featured" href="/guides/job-apply-agent/">
+    <span class="badge-free">FREE</span>
+    <span class="ic">&#127919;</span>
+    <span class="tx"><span class="t1">&#127873; Free Guide: Build Your Own AI Job-Apply Agent</span><span class="t2">Find jobs, skip the junk, tailor your resume &mdash; no code</span></span>
+    <span class="ar">&#8250;</span>
+  </a>
+
+  <a class="btn featured" href="/guides/ceo-agent/">
+    <span class="badge-free">FREE</span>
+    <span class="ic">&#128081;</span>
+    <span class="tx"><span class="t1">&#127873; Free Guide: Build Your Own AI CEO Agent</span><span class="t2">Meet Victoria &mdash; your weekly AI strategist</span></span>
+    <span class="ar">&#8250;</span>
+  </a>
+
+  <a class="btn featured" href="/guides/grocery-savings-agent/">
+    <span class="badge-free">FREE</span>
+    <span class="ic">&#128722;</span>
+    <span class="tx"><span class="t1">&#127873; Free Guide: Feed Your Family for Less with AI</span><span class="t2">Meet Penny &mdash; plans meals, compares stores, clips coupons</span></span>
     <span class="ar">&#8250;</span>
   </a>
 
@@ -91,6 +142,5 @@
 
   <p class="ft"><a href="https://learningaiwithlaureen.com">learningaiwithlaureen.com</a></p>
 </div>
-<script>try{fetch("https://learningai-lens.laureennicholson635.workers.dev/px?u="+encodeURIComponent(location.href)+"&r="+encodeURIComponent(document.referrer)+"&s="+screen.width+"x"+screen.height,{mode:"no-cors"})}catch(e){}</script>
 </body>
 </html>
