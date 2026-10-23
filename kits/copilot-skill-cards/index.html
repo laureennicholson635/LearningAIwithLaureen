@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copilot Skill Cards</title>
+<style>
+  :root { --bg:#f6f7fb; --ink:#1b1b1f; --muted:#6b7280; --card:#ffffff; --accent:#0b1f44; --line:#e5e7eb; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0f1117; --ink:#f3f4f6; --muted:#9ca3af; --card:#171a23; --accent:#ffd23f; --line:#2a2f3a; } }
+  :root[data-theme="dark"] { --bg:#0f1117; --ink:#f3f4f6; --muted:#9ca3af; --card:#171a23; --accent:#ffd23f; --line:#2a2f3a; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family: "Segoe UI", system-ui, sans-serif; padding:24px 16px 48px; }
+  h1 { font-size:22px; margin:0 0 6px; }
+  p.sub { color:var(--muted); margin:0 0 20px; font-size:14px; line-height:1.5; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .card img { display:block; width:100%; height:auto; }
+  .card .meta { padding:10px 12px 12px; font-size:13px; }
+  .card .meta b { display:block; color:var(--ink); margin-bottom:4px; }
+  .card .meta span { color:var(--muted); }
+  .card a.dl { display:inline-block; margin-top:8px; font-size:13px; color:var(--accent); font-weight:600; text-decoration:none; }
+</style>
+</head>
+<body>
+<h1>Copilot skill video: the 11 cards</h1>
+<p class="sub">1080x1920, drop straight into CapCut. Tap a card to open it full size, then save it. The time column is where it goes in the script.</p>
+<div class="grid" id="grid"></div>
+<script>
+const cards = [
+  ["00_hook_card.png", "Hook card", ":00-:07  You can now hand Copilot a job description."],
+  ["01_concept_card.png", "Concept card", ":23-:31  A skill is a text file."],
+  ["STEP1a_Three_dots.png", "Step 1a", ":31-:33  Copilot pane, three dots top right (illustration)."],
+  ["STEP1b_Manage_plugins_and_skills.png", "Step 1b", ":33-:35  Manage plugins & skills (illustration)."],
+  ["STEP1c_Custom_skills.png", "Step 1c", ":35-:36  Custom skills (Microsoft screenshot)."],
+  ["STEP2_Add_in_OneDrive.png", "Step 2", ":36-:40  Add in OneDrive, then Open skills folder (Microsoft screenshot)."],
+  ["STEP3_New_folder_drop_in_SKILL_md.png", "Step 3", ":40-:46  New folder read-the-comments, SKILL.md inside (illustration)."],
+  ["STEP4_Refresh.png", "Step 4", ":46-:49  Refresh (Microsoft screenshot)."],
+  ["STEP5_Type_the_at_name.png", "Step 5", ":49-:57  Click the column, type @read-the-comments (illustration)."],
+  ["06_one_sentence_card.png", "One-sentence card", ":57-:65  Fewer than three people = a person, not a pattern."],
+  ["07_five_steps_card.png", "Five-steps card", "Pinned-comment image or last frame."],
+];
+const g = document.getElementById("grid");
+for (const [f, t, s] of cards) {
+  const el = document.createElement("div"); el.className = "card";
+  el.innerHTML = `<a href="${f}" target="_blank" rel="noopener"><img src="${f}" alt="${t}" loading="lazy"></a>
+    <div class="meta"><b>${t}</b><span>${s}</span><br><a class="dl" href="${f}" download="${f}">Download</a></div>`;
+  g.appendChild(el);
+}
+</script>
+</body>
+</html>
